@@ -1,12 +1,15 @@
 import React from "react"
 import { Container, Nav, Navbar } from "react-bootstrap"
 import brandIcon from "../../icons/brandIcon.ico"
+import About from "../About/About"
+import LoginButton from "./LoginButton"
+import Themes from "./Themes"
 
 
 export default function MyNavbar(props) {
   return (
     <>
-      <Navbar sticky="top" bg="dark" variant="dark" expand="lg" id="navbar">
+      <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
       <Container>
 
         <Navbar.Brand href="/">
@@ -24,23 +27,16 @@ export default function MyNavbar(props) {
 
         <Navbar.Collapse>
           <Nav>
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/">About</Nav.Link>
+            <About />
           </Nav>
         </Navbar.Collapse>
 
         <Navbar.Collapse>
-          <Nav as="ul">
-            <Nav.Item as="li">
-              <Nav.Link id="dark">Dark</Nav.Link>
-            </Nav.Item>
-            <Nav.Item as="li">
-              <Nav.Link id="light">Light</Nav.Link>
-            </Nav.Item>
-            <Nav.Item as="li">
-              <Nav.Link id="solar">Solarize</Nav.Link>
-            </Nav.Item>
-          </Nav>
+          <Themes />
+        </Navbar.Collapse>
+
+        <Navbar.Collapse>
+          <LoginButton />
         </Navbar.Collapse>
 
       </Container>

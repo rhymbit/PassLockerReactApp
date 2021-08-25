@@ -9,9 +9,6 @@ export default function MyFooter() {
 
     <Card
       id="footer"
-      bg="light"
-      text="dark"
-      transition="transition"
     >
       <Card.Header>About me 👋</Card.Header>
 
