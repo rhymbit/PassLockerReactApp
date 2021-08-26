@@ -1,23 +1,30 @@
-import React from "react"
-import { Dropdown, NavDropdown } from "react-bootstrap"
+import React, { useState } from "react"
+import { useEffect } from "react"
+import { darkTheme, lightTheme } from '../../js/themes'
 
 export default function Themes() {
 
-  const onClick = () => {
-    console.log("Light button clicked")
-    let r = document.querySelector(':root')
-    r.style.setProperty('--gray6', '#a82dd1')
+  const [theme, setTheme] = useState("dark")
+
+  const onClick = (e) => {
+    const currentTheme = e.target.value
+    console.log(currentTheme)
+    currentTheme === "dark" ? setTheme("light") : setTheme("dark")
   }
 
+  useEffect(() => {
+    theme === "dark" ? darkTheme() : lightTheme()
+  }, [theme])
+
   return (
-    <Dropdown>
-      <Dropdown.Toggle variant="secondary">
-        Themes
-      </Dropdown.Toggle>
-      <Dropdown.Menu variant="dark">
-        <Dropdown.Item id="light" onClick={onClick} href="#">Light</Dropdown.Item>
-        <Dropdown.Item id="dark" href="/">Dark</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <label className="toggle-theme">
+      <input 
+        id="themeToggle" 
+        type="checkbox" 
+        value={theme}
+        onClick={onClick}
+      />
+      <span className="slider"></span>
+    </label>
   )
 }

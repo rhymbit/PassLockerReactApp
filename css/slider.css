@@ -1,0 +1,68 @@
+/* (A) HIDE DEFAULT CHECKBOX */
+.toggle-theme input { display: none; }
+
+/* (B) TOGGLE BUTTON WRAPPER */
+.toggle-theme {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 30px;
+}
+
+/* (C) CUSTOM TOGGLE BUTTON "OUTSIDE BOX" */
+.toggle-theme .slider {
+  /* (C1) FULLY FILL  CONTAINER */
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  /* (C2) COSMETIC STYLES */
+  cursor: pointer;
+  background-color: #1f4b8d;
+}
+
+/* (D) CUSTOM TOGGLE BUTTON "INSIDE SLIDER BUTTON" */
+.toggle-theme .slider::before {
+  /* (D1) FILL UP HALF OF  CONTAINER */
+  content: "";
+  width: 45%;
+  height: 100%;
+  /* (D2) DEFAULT BUTTON POSITION - LEFT */
+  position: absolute;
+  top: 0; left: 0;
+  /* (D3) COSMETIC STYLES */
+  background-color: #eee;
+}
+
+/* (E) ON CHECKED (SWITCHED ON) */
+/* (E1) MAGIC CSS SLIDING ANIMATION */
+.toggle-theme .slider, .toggle-theme .slider::before { 
+  border-radius: 20px;
+  transition: all 0.2s; 
+}
+/* (E2) TURN GREEN */
+.toggle-theme input:checked + .slider {
+  background-color: #8ebb3a;
+}
+/* (E3) MOVE SLIDER BUTTON TO RIGHT */
+.toggle-theme input:checked + .slider::before { left: 50%; }
+
+/* (F) OFF INDICATOR */
+.toggle-theme .slider::after {
+  /* (F1) FILL UP HALF OF  CONTAINER */
+  width: 45%;
+  height: 100%;
+  /* (F2) DEFAULT POSITION - RIGHT */
+  position: absolute;
+  top: 0; left: 50%;
+  /* (F3) "OFF" TEXT */
+  content: "🌜";
+  text-align: center;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* (G) ON INDICATOR */
+.toggle-theme input:checked + .slider::after {
+  content: "🌞";
+  left: 0;
+}
