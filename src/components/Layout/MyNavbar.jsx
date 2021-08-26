@@ -1,12 +1,19 @@
 import React from "react"
 import { Container, Nav, Navbar } from "react-bootstrap"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import brandIcon from "../../icons/brandIcon.ico"
 import About from "../About/About"
+import Logout from "../LoginLogout/Logout"
+import LoggedIn from "./LoggedIn"
 import LoginButton from "./LoginButton"
 import Themes from "./Themes"
 
 
-export default function MyNavbar(props) {
+export default function MyNavbar() {
+
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+
   return (
     <>
       <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
@@ -36,7 +43,12 @@ export default function MyNavbar(props) {
         </Navbar.Collapse>
 
         <Navbar.Collapse>
-          <LoginButton />
+          {
+            isLoggedIn ?
+              <LoggedIn />
+            :
+              <LoginButton />
+          }
         </Navbar.Collapse>
 
       </Container>

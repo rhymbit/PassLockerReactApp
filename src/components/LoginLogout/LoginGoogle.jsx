@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useGoogleLogin } from "react-google-login"
 import { googleUserLogin, setUserProfilePictureUrl } from "../../redux//userSlice"
 import googleIcon from "../../icons/google.svg"
+import { Redirect } from 'react-router-dom';
 import { Dropdown } from "react-bootstrap"
 
 
@@ -37,7 +38,7 @@ export default function LoginGoogle() {
 function useLogin() {
   const dispatch = useDispatch()
   const clientId = useSelector(state => state.user.googleClientId)
-  const url = useSelector(state => state.user.googleLoginUrl)
+  const urlLoginBackend = useSelector(state => state.user.googleLoginUrl)
 
   const { signIn } = useGoogleLogin({
     clientId: clientId,
@@ -48,7 +49,7 @@ function useLogin() {
       var id_token = googleUser.getAuthResponse().id_token
 
       dispatch(googleUserLogin({
-        url: url,
+        url: urlLoginBackend,
         payload: id_token
       }))
 

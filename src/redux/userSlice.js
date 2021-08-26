@@ -8,7 +8,7 @@ const initialState = {
   googleLoginUrl: `${apiUrl}/login/google-login`,
   createUserUrl: `${apiUrl}/user/create-user`,
   userId: null,
-  userName: null,
+  username: null,
   userData: null,
   isConfirmed: null,
   isNewUser: null,
@@ -71,14 +71,15 @@ const userSlice = createSlice({
         // already registered user
         else {
           state.isNewUser = false
-          state.userName = action.payload.userName
+          state.username = action.payload.userName
           state.isLoggedIn = true
           state.isConfirmed = action.payload.isConfirmed
           state.isGoogleLoggedIn =true
         }
         state.userData = action.payload
-        console.log(state.userData)
         state.userId = action.payload.userId
+        
+        console.log(state.userData)
       })
 
       .addCase(createUser.pending, (state, action) => {
@@ -86,7 +87,7 @@ const userSlice = createSlice({
 
       .addCase(createUser.fulfilled, (state, action) => {
         state.userData = action.payload
-        state.userName = action.payload.userName
+        state.username = action.payload.userName
         state.isConfirmed = action.payload.isConfirmed
         state.isNewUser = false
         state.isLoggedIn = true

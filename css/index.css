@@ -10,7 +10,7 @@ body {
 header {
   padding: 1em;
   clip-path: polygon(50% 0%, 100% 0, 100% 65%, 50% 100%, 0 65%, 0 0);
-  background: linear-gradient(to right, var(--gray4), var(--gray6));
+  background: linear-gradient(to right, var(--gray3), var(--gray6));
   color: var(--gray0);
   margin-bottom: 1em;
   padding-bottom: 3.5em;
@@ -54,11 +54,29 @@ header {
   --transitionSmooth: background 500ms ease-in-out, color 1000ms ease-in-out;
 }
 
-.dark {
-  --bg: var(--gray5);
-  --bg-nav: linear-gradient(to right, var(--gray5), var(--gray6));
-  --bg-dropdown: var(--gray6);
-  --text: var(--gray0);
-  --border-color: var(--purple);
-  --bg-solar: var(--blue);
+/* Logo Animation */
+
+
+@keyframes color-rotate {
+  from {
+      filter: hue-rotate(0deg);
+  }
+  to {
+      filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logo:hover {
+  animation: logo-spin 1.5s;
+  animation-iteration-count: initial; 
+  animation-direction: normal;
 }
