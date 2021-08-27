@@ -2,8 +2,14 @@ import React from "react";
 import { Card, Nav, Container } from "react-bootstrap";
 import instagramIcon from "../../icons/instagram.ico"
 import discordIcon from "../../icons/discord.ico"
+import githubIcon from "../../icons/github.ico"
 
 export default function MyFooter() {
+
+  const instagramProfile = `https://www.instagram.com/prateekator/`
+  const discordProfile = `https://discordapp.com/users/880807984807174255`
+  const githubProfile = `https://github.com/prateek332`
+
   return (
     <Container fluid>
 
@@ -12,43 +18,50 @@ export default function MyFooter() {
     >
       <Card.Header>About me 👋</Card.Header>
 
-      <Nav variant="tabs" defaultActiveKey="#first">
+      <Nav className="justify-content-center" variant="pills">
+
         <Nav.Item>
-          <Nav.Link 
-            href="https://www.instagram.com/prateekator/"
-          >
-          <img
-            alt="Instagram Icon"
-            src={instagramIcon}
-            width={23}
-            height={23}
-            className="d-inline-block align-top"
-          />{' '}
-            my instagram
+          <Nav.Link href={instagramProfile} target="_blank">
+            <img
+              alt="Instagram Icon"
+              src={instagramIcon}
+              width={23}
+              height={23}
+              className="d-inline-block align-top"
+            />{' '}my-instagram
           </Nav.Link>
         </Nav.Item>
 
         <Nav.Item>
-          <Nav.Link 
-            href="https://discord.com/login"
-          >
+          <Nav.Link href={discordProfile} target="_blank">
           <img
-            alt="Discord Icon"
+            alt="DiscordIcon"
             src={discordIcon}
             width={23}
             height={23}
             className="d-inline-block align-top"
-          />{' '}
-            find me on Discord at acceleratoꭆ#5772
+          />{' '}my-discord
           </Nav.Link>
         </Nav.Item>
+
+        <Nav.Item>
+          <Nav.Link href={githubProfile} target="_blank">
+          <img
+            alt="GithubIcon"
+            src={githubIcon}
+            width={25}
+            height={25}
+            className="d-inline-block align-top"
+          />{' '}my-github
+          </Nav.Link>
+        </Nav.Item>
+
       </Nav>
 
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p>
-            I'm just a regular person, who loves to build stuff, either using code, or
-            some other way. I'm an engineer at heart 🙂.
+            Some stuff about me.
           </p>
 
           <footer className="blockquote-footer">

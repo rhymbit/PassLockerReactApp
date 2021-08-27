@@ -4,13 +4,6 @@ form {
   justify-content: center;
 }
 
-
-.form {
-  background: #0e101c;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
 p {
   color: #bf1650;
 }
@@ -25,7 +18,7 @@ input {
   box-sizing: border-box;
   width: 100%;
   border-radius: 4px;
-  border: 1px solid white;
+  border: 1px solid rgb(129, 39, 114);
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -36,22 +29,24 @@ select {
   border-radius: 4px;
   min-height: 37px;
   background: #ffffff;
+  margin-bottom:10px;
 }
 
 label {
   line-height: 2;
   text-align: left;
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 1px;
   margin-top: 20px;
-  color: white;
-  font-size: 14px;
-  font-weight: 200;
+  color: var(--gray0);
+  font-size: 15px;
+  font-family: Montserrat;
+  font-weight: 400;
 }
 
 button[type="submit"],
 input[type="submit"] {
-  background: #ec5990;
+  background: #dd427b;
   color: white;
   text-transform: uppercase;
   border: none;
@@ -77,7 +72,7 @@ input[type="submit"]:active {
 }
 
 input:disabled {
-  color: white;
+  color: var(--gray0);
   opacity: 0.8;
 }
 

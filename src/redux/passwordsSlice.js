@@ -73,6 +73,7 @@ const passwordsSlice = createSlice({
       .addCase(verifyUser.fulfilled, (state, action) =>{
         localStorage.setItem("passwordToken", action.payload)
         state.userVerified = true
+        state.userCredentialsWrong = false
 
       })
       .addCase(verifyUser.rejected, (state, action) => {
@@ -80,12 +81,10 @@ const passwordsSlice = createSlice({
       })
 
       .addCase(verifyPasswordToken.fulfilled, (state, action) => {
-        console.log("Token is verified")
         state.userVerified = true
 
       })
       .addCase(verifyPasswordToken.rejected, (state, action) => {
-        console.log("Token has expired")
         state.tokenFound = false
         localStorage.removeItem("passwordToken")
       })

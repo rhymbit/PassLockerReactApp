@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet-async';
 import { createVerificationUrl, verifyUser } from "../../redux/passwordsSlice";
 import { useEffect } from "react";
 
+
 export default function VerifyUserForm() {
 
   const { register, handleSubmit, formState: {errors} } = useForm({
@@ -43,7 +44,7 @@ export default function VerifyUserForm() {
           userCredentialsWrong ?
             <h2>Entered Details are incorrect</h2>
           :
-            <></>
+            <h2>Please First Verify Yourself</h2>
         }
 
         <div>

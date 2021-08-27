@@ -2,7 +2,7 @@ function darkTheme() {
 
   let r = document.querySelector(':root')
 
-  r.style.setProperty(`--gray0`, `#e0d3d3`)
+  r.style.setProperty(`--gray0`, `#e5eaee`)
   r.style.setProperty(`--gray1`, `#dbe1e8`)
   r.style.setProperty(`--gray2`, `#b2becd`)
   r.style.setProperty(`--gray3`, `#6c7983`)
@@ -21,7 +21,7 @@ function lightTheme() {
   r.style.setProperty(`--gray3`, `#6c7983`)
   r.style.setProperty(`--gray4`, `#b2becd`)
   r.style.setProperty(`--gray5`, `#dbe1e8`)
-  r.style.setProperty(`--gray6`, `#e0d3d3`)
+  r.style.setProperty(`--gray6`, `#e5eaee`)
 }
 
 export { darkTheme, lightTheme }

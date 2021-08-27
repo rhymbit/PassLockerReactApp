@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setPasswordsUserId, setTokenFound } from "../../redux/passwordsSlice"
 import VerifyUserForm from "../Forms/VerifyUserForm"
+import VerifyToken from "./VerifyToken"
 
 export default function Passwords() {
   // set the userId in passwords slice,
@@ -21,7 +22,7 @@ export default function Passwords() {
   const tokenFound = useSelector(state => state.passwords.tokenFound)
 
   useEffect(() => {
-  }, [userVerified])
+  }, [userVerified, tokenFound])
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function Passwords() {
           <>
             {
               tokenFound ?
-                <h1>Verify Token</h1>
+                <VerifyToken passwordToken={passwordToken}/>
               :
                 <VerifyUserForm />
             }

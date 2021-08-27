@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React from "react";
+import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from "react-hook-form";
@@ -49,7 +50,9 @@ function NewUserForm() {
             <h1>Hello {name}. Just need a few more details from you before setting up your profile.</h1>
           </Container>
       
-          <form onSubmit={handleSubmit(onSubmit)} >
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div>
               <label>Username</label>
               <input {...register("username")} />
@@ -70,7 +73,7 @@ function NewUserForm() {
                 <option value="">Your favorite food?</option>
                 <option value="">Your favorite TV show?</option>
               </select>
-              <br />
+              
               <input {...register("secret")} />
               {errors.secret && <p>{errors.secret.message}</p>}
             </div>
