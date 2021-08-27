@@ -1,27 +1,51 @@
-import React, { useEffect } from "react"
+import React from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createVerificationUrl, getPasswords } from "../../redux/passwordsSlice"
+import { setPasswordsUserId, setTokenFound } from "../../redux/passwordsSlice"
+import VerifyUserForm from "../Forms/VerifyUserForm"
 
 export default function Passwords() {
+  // set the userId in passwords slice,
+  // which is required to create verification url's
+  useSetPasswordsUserId()
 
-  const passwords = useSelector(state => state.passwords.passwords)
-  const isPasswordNull = useSelector(state => state.passwords.isPasswordNull)
-
-  const passwordsUrl = useSelector(createVerificationUrl(`get-passwords`))
   const dispatch = useDispatch()
 
+  // checking to see if token exists
+  const passwordToken = localStorage.getItem(`passwordToken`)
+  if (passwordToken !== null) {
+    dispatch(setTokenFound(true))
+  }
+
+  const userVerified = useSelector(state => state.passwords.userVerified)
+  const tokenFound = useSelector(state => state.passwords.tokenFound)
+
   useEffect(() => {
-    dispatch(getPasswords({ url: passwordsUrl }))
-  }, [isPasswordNull])
+  }, [userVerified])
 
   return (
     <>
       {
-        isPasswordNull ?
-          <h1>Passwords are coming</h1>
+        userVerified ?
+          <h1>Show all passwords</h1>
         :
-          <h1>Passwords are here</h1>
+          <>
+            {
+              tokenFound ?
+                <h1>Verify Token</h1>
+              :
+                <VerifyUserForm />
+            }
+          </>
       }
     </>
   )
+}
+
+function useSetPasswordsUserId() {
+  const dispatch = useDispatch()
+  const userId = useSelector(state => state.user.userId)
+  if (userId != null) {
+    dispatch(setPasswordsUserId(userId))
+  }
 }

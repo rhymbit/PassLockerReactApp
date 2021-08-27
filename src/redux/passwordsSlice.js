@@ -6,8 +6,9 @@ const apiUrl = `https://localhost:5001/api/password`
 
 const initialState = {
   userId: null,
-  isVerified: false,
-  isTokenStored: false,
+  tokenFound: false,
+  userVerified: false,
+  userCredentialsWrong: false,
 }
 
 const createVerificationUrl = endPoint => state => {
@@ -50,34 +51,45 @@ const passwordsSlice = createSlice({
       state.userId = action.payload
     },
 
-    setPasswordsToken(state, action) {
-      state.token = action.payload
+    setTokenFound(state, action) {
+      state.tokenFound = action.payload
     },
 
-    setPasswordsIsVerified(state, action) {
-      state.isVerified = action.payload
+    setTokenVerified(state, action) {
+      state.tokenVerified = action.payload
     }, 
 
-    setIsTokenStored(state, action) {
-      state.isTokenStored = action.payload
+    setUserVerified(state, action) {
+      state.userVerified = action.payload
+    }, 
+
+    setUserCredentialsWrong(state, action) {
+      state.userCredentialsWrong = action.payload
     }
   },
   extraReducers: builder => {
     builder
+
       .addCase(verifyUser.fulfilled, (state, action) =>{
-        if (action.payload) {          
-          localStorage.setItem("passwordToken", action.payload)
-        }
-        state.isVerified = true
+        localStorage.setItem("passwordToken", action.payload)
+        state.userVerified = true
+
       })
+      .addCase(verifyUser.rejected, (state, action) => {
+        state.userCredentialsWrong = true
+      })
+
       .addCase(verifyPasswordToken.fulfilled, (state, action) => {
         console.log("Token is verified")
-        state.isVerified = true
+        state.userVerified = true
+
       })
       .addCase(verifyPasswordToken.rejected, (state, action) => {
         console.log("Token has expired")
-        state.isTokenStored = false
+        state.tokenFound = false
+        localStorage.removeItem("passwordToken")
       })
+
       .addCase(getPasswords.fulfilled, (state, action) => {
         console.log(action.payload)
       })
@@ -88,9 +100,11 @@ const passwordsSlice = createSlice({
 export default passwordsSlice.reducer
 
 export const {
-  setPasswordsToken,
   setPasswordsUserId,
-  setIsTokenStored,
+  setTokenFound,
+  setTokenVerified,
+  setUserVerified,
+  setUserCredentialsWrong,
 } = passwordsSlice.actions
 
 export { 

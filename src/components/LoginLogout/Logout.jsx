@@ -11,10 +11,11 @@ export default function Logout() {
   const dispatch = useDispatch()
 
   return (
-    <Button 
+    <Button
       variant="secondary"
       href="/" 
       onClick={onLogout}
+      className="d-inline-block align-top"
     >
       <img
         alt="LogoutIcon"
