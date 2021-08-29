@@ -37,11 +37,9 @@ header {
 }
 
 .table {
-  width: 50%;
+  width: 600px;
   margin: auto;
-  margin-top: 10%;
 }
-
 
 #footer {
   background: var(--gray5);
@@ -58,6 +56,13 @@ header {
   --gray5: #2a2e35;
   --gray6: #1a2327;
   --transitionSmooth: background 500ms ease-in-out, color 1000ms ease-in-out;
+}
+
+@media all and (max-width: 600px) {
+  .table {
+    width: 500px;
+    margin: 2em auto;
+  }
 }
 
 /* Logo Animation */

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useSelector } from "react-redux"
 import PasswordsRequest from "./PasswordsRequest"
-import PasswordsTable from "./PasswordsTable"
+import TableOrForm from "./PasswordsTable/TableOrForm"
 
 
 export default function ShowPasswords() {
@@ -14,7 +14,7 @@ export default function ShowPasswords() {
     <>
       {
         canShowPasswords ?
-          <PasswordsTable />
+          <TableOrForm />
         :
           <PasswordsRequest />
       }
