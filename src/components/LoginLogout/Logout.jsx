@@ -3,18 +3,19 @@ import { Button } from "react-bootstrap";
 import { useGoogleLogout } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import logoutIcon from '../../icons/logout.ico';
+import { setUserPasswords } from "../../redux/passwordsSlice";
 import { setUserIsGoogleLoggedIn, setUserIsLoggedIn } from "../../redux/userSlice";
 
 export default function Logout() {
 
   const onLogout = useLogout()
-  const dispatch = useDispatch()
+  const onLogoutDeletePasswords = useDeletePasswords()
 
   return (
     <Button
       variant="secondary"
       href="/" 
-      onClick={onLogout}
+      onClick={() => {onLogout(); onLogoutDeletePasswords();}}
       className="d-inline-block align-top"
     >
       <img
@@ -48,4 +49,15 @@ function useLogout() {
   if (isGoogleLoggedIn) {
     return signOut
   }
+}
+
+function useDeletePasswords() {
+  const dispatch = useDispatch()
+  const userPasswords = useSelector(state => state.passwords.userPasswords)
+
+  const onLogout = () => {
+    dispatch(setUserPasswords(null))
+  }
+
+  return onLogout
 }

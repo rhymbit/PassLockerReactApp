@@ -9,6 +9,8 @@ const initialState = {
   tokenFound: false,
   userVerified: false,
   userCredentialsWrong: false,
+  userPasswords: null,
+  canShowPasswords: false,
 }
 
 const createVerificationUrl = endPoint => state => {
@@ -37,8 +39,16 @@ const verifyPasswordToken = createAsyncThunk('passwords/verifyToken',
   })
 
 const getPasswords = createAsyncThunk('passwords/getPasswords',
-    ({ url }) => {
-      return get(url)
+    ({ url }) => { return get(url) })
+
+const postPasswords = createAsyncThunk(`passwords/create-passwords`,
+    ({ url, payload }) => {
+      try {
+        const success = post(url, payload)
+        return success
+      } catch (err) {
+        return isRejectedWithValue(err)
+      }
     })
 
 
@@ -65,13 +75,23 @@ const passwordsSlice = createSlice({
 
     setUserCredentialsWrong(state, action) {
       state.userCredentialsWrong = action.payload
+    }, 
+
+    setUserPasswords(state, action) {
+      state.userPasswords = action.payload
+    }, 
+
+    setCanShowPasswords(state, action) {
+      state.canShowPasswords = action.payload
     }
   },
+
   extraReducers: builder => {
     builder
 
       .addCase(verifyUser.fulfilled, (state, action) =>{
-        localStorage.setItem("passwordToken", action.payload)
+        console.log(action.payload)
+        localStorage.setItem(`passwordToken`, action.payload)
         state.userVerified = true
         state.userCredentialsWrong = false
 
@@ -90,7 +110,20 @@ const passwordsSlice = createSlice({
       })
 
       .addCase(getPasswords.fulfilled, (state, action) => {
+        console.log(`Passwords Fetched Successfully`)
         console.log(action.payload)
+        state.userPasswords = action.payload
+        state.canShowPasswords = true
+      })
+
+      .addCase(postPasswords.fulfilled, (state, action) => {
+        console.log(`Passwords Created Successfully`)
+        console.log(action.payload)
+        state.canShowPasswords = true
+      })
+
+      .addCase(postPasswords.rejected, (state, action) => {
+        console.log(`Could not create passwords`)
       })
   }
 })
@@ -104,10 +137,13 @@ export const {
   setTokenVerified,
   setUserVerified,
   setUserCredentialsWrong,
+  setUserPasswords,
+  setCanShowPasswords,
 } = passwordsSlice.actions
 
 export { 
   createVerificationUrl,
   verifyUser,
   verifyPasswordToken,
-  getPasswords }
+  getPasswords,
+  postPasswords, }

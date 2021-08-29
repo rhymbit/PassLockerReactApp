@@ -36,6 +36,12 @@ header {
   transition: var(--transitionSmooth)
 }
 
+.table {
+  width: 50%;
+  margin: auto;
+  margin-top: 10%;
+}
+
 
 #footer {
   background: var(--gray5);

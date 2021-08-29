@@ -3,7 +3,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setPasswordsUserId, setTokenFound } from "../../redux/passwordsSlice"
 import VerifyUserForm from "../Forms/VerifyUserForm"
+import ShowPasswords from "./ShowPasswords"
 import VerifyToken from "./VerifyToken"
+import MyNavbar from "../Layout/MyNavbar"
 
 export default function Passwords() {
   // set the userId in passwords slice,
@@ -14,7 +16,8 @@ export default function Passwords() {
 
   // checking to see if token exists
   const passwordToken = localStorage.getItem(`passwordToken`)
-  if (passwordToken !== null) {
+
+  if (passwordToken != null) {
     dispatch(setTokenFound(true))
   }
 
@@ -26,9 +29,12 @@ export default function Passwords() {
 
   return (
     <>
+
+      <MyNavbar />
+
       {
         userVerified ?
-          <h1>Show all passwords</h1>
+          <ShowPasswords />
         :
           <>
             {

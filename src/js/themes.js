@@ -1,6 +1,7 @@
 function darkTheme() {
 
   let r = document.querySelector(':root')
+  passwordsTableTheme(`dark`)
 
   r.style.setProperty(`--gray0`, `#e5eaee`)
   r.style.setProperty(`--gray1`, `#dbe1e8`)
@@ -14,7 +15,8 @@ function darkTheme() {
 function lightTheme() {
 
   let r = document.querySelector(':root')
-
+  passwordsTableTheme()
+  
   r.style.setProperty(`--gray0`, `#1a2327`)
   r.style.setProperty(`--gray1`, `#2a2e35`)
   r.style.setProperty(`--gray2`, `#454e56;`)
@@ -24,4 +26,16 @@ function lightTheme() {
   r.style.setProperty(`--gray6`, `#e5eaee`)
 }
 
-export { darkTheme, lightTheme }
+function passwordsTableTheme(theme) {
+
+  let table = document.querySelector(`[passwordstable]`)
+
+  if (table) {
+    theme === `dark` ? 
+        table.classList.add(`table-dark`) 
+      : 
+        table.classList.remove(`table-dark`)
+  }
+}
+
+export { darkTheme, lightTheme, passwordsTableTheme }

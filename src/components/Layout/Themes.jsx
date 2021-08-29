@@ -1,27 +1,27 @@
-import React, { useState } from "react"
-import { useEffect } from "react"
-import { darkTheme, lightTheme } from '../../js/themes'
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setAppTheme } from "../../redux/appSlice"
+import { lightTheme, darkTheme } from "../../js/themes"
 
 export default function Themes() {
 
-  const [theme, setTheme] = useState("dark")
+  const dispatch = useDispatch()
+  const currentTheme = useSelector(state => state.app.theme)
 
   const onClick = (e) => {
-    const currentTheme = e.target.value
-    console.log(currentTheme)
-    currentTheme === "dark" ? setTheme("light") : setTheme("dark")
+    currentTheme === `dark` ? lightTheme() : darkTheme()
+    dispatch(setAppTheme(e.target.value === `dark` ? `light` : `dark`))
   }
 
   useEffect(() => {
-    theme === "dark" ? darkTheme() : lightTheme()
-  }, [theme])
+  }, [currentTheme])
 
   return (
     <label className="toggle-theme">
       <input 
         id="themeToggle" 
         type="checkbox" 
-        value={theme}
+        value={currentTheme}
         onClick={onClick}
       />
       <span className="slider"></span>

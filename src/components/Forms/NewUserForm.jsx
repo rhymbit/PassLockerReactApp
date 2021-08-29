@@ -43,7 +43,7 @@ function NewUserForm() {
         isNewUser ?
         <>
           <Helmet>
-            <link rel="stylesheet" type="text/css" href={`/css/newUserForm.css`} />
+            <link rel="stylesheet" type="text/css" href={`/css/reactform.css`} />
           </Helmet>
 
           <Container>
