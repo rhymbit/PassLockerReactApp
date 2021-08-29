@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useGoogleLogout } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
-import logoutIcon from '../../icons/logout.ico';
+import logoutIcon from '../../icons/logout.svg';
 import { setUserPasswords } from "../../redux/passwordsSlice";
 import { setUserIsGoogleLoggedIn, setUserIsLoggedIn } from "../../redux/userSlice";
 

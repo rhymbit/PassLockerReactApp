@@ -1,12 +1,16 @@
 import React, { useState } from "react"
-import { Col, Container, Nav, Navbar } from "react-bootstrap"
+import { Col, Container, Nav, Navbar, Row } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import brandIcon from "../../icons/brandIcon.ico"
 import About from "../About/About"
 import LoggedIn from "./LoggedIn"
 import LoginButton from "./LoginButton"
 import Themes from "./Themes"
+import brandIcon from "../../icons/brandIcon.svg"
+import homeIcon from "../../icons/home.svg"
+import aboutIcon from "../../icons/about.svg"
+import context from "react-bootstrap/esm/AccordionContext"
+
 
 export default function MyNavbar() {
 
@@ -17,53 +21,58 @@ export default function MyNavbar() {
 
   return (
     <>
-      <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
+      <Navbar sticky="top" bg="dark" variant="dark" expand="md">
         <Container>
-          <Navbar.Brand>
-            <img
-              alt="brand-icon"
-              src={brandIcon}
-              width={30}
-              height={30}
-              className="d-inline-block align-top"
-              />{' '}
-              PassLocker
-          </Navbar.Brand>
+              <Navbar.Brand>
+                  {icon(brandIcon, `brand-icon`, 30, 30)}
+                  PassLocker
+              </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-          <Navbar.Collapse>
-            <Col xs={12} md={1}>
-              <Nav>
-                <Link className="nav-link" to="/">Home</Link>
-              </Nav>
-            </Col>
+            <Navbar.Collapse>
+                <Nav>
+                  <Link className="nav-link" to="/">
+                  {icon(homeIcon, `home-icon`, 22, 22)}
+                  Home
+                  </Link>
+                </Nav>
+                <Nav>
+                  <Nav.Link onClick={() => setModalShow(true)}>
+                  {icon(aboutIcon, `about-icon`, 22, 22)}
+                    About
+                  </Nav.Link>
+                </Nav>
+                  <About show={modalShow} onHide={() => setModalShow(false)}/>
 
-            <Col xs={12} md={3}>
-              <Nav>
-                <Nav.Link onClick={() => setModalShow(true)}>About</Nav.Link>
-              </Nav>
-                <About show={modalShow} onHide={() => setModalShow(false)}/>
-            </Col>
-            
-            <Col xs={12} md={isLoggedIn ? 3 : 5}>
-              <Nav>
-                <Themes />
-              </Nav>
-            </Col>
+                <Nav>
+                  <Themes />
+                </Nav>
 
-            <Col xs={12} md={5}>
-              {
-                isLoggedIn ?
-                <LoggedIn />
-                :
-                <LoginButton />
-              }
-            </Col>
+                {
+                  isLoggedIn ?
+                  <LoggedIn />
+                  :
+                  <LoginButton />
+                }
 
-          </Navbar.Collapse>
+            </Navbar.Collapse>
         </Container>
       </Navbar>
+    </>
+  )
+}
+
+function icon(src, alt=`Icon`, width=25, height=25, className=`d-inline-block align-top`) {
+  return (
+    <>
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+      />{` `}
     </>
   )
 }

@@ -44,16 +44,13 @@ export default function MainBody() {
   var tiles = serviceOffered.map((item, index) => {
     return (
         <Col key={index} className="my-md-5 my-2" md="auto" xs="auto">
-          <Card 
+          <Card
             id={`service-card-${index}`}
             className="services"
           >
             <Card.Img variant="top" src={instagramLogo} />
-            <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
-              <Card.Text>
-                {item.text}
-              </Card.Text>
+            <Card.Body className="services-text">
+              <Card.Text>Something</Card.Text>
             </Card.Body>
           </Card>
         </Col>

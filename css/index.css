@@ -18,6 +18,24 @@ header {
   transition: var(--transitionSmooth)
 }
 
+.navbar {
+  height: 70px;
+  width: 100%;
+}
+
+.navbar-nav {
+  display: flexbox;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar-toggler {
+  position: absolute;
+  right: 1em;
+}
+
 .modal-content {
   color:#1a2327;
 }
@@ -29,11 +47,38 @@ header {
 }
 
 .services {
+  position: relative;
   background: var(--gray5);
   color: var(--gray0);
   border-radius: 2em;
   width: 13rem;
   transition: var(--transitionSmooth)
+}
+
+.services:hover {
+  background-color: var(--gray6);
+  transition: 700ms;
+}
+
+.services-text {
+  max-width: 195px;
+  cursor: none;
+  margin-top: 50px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  opacity: 0;
+}
+
+
+.services:hover .card-img-top {
+  opacity: 0.5;
+}
+
+.services:hover .services-text {
+  opacity: 1;
+  transition: 700ms;
 }
 
 .table {
@@ -86,8 +131,17 @@ header {
   }
 }
 
+@keyframes vanish {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .logo:hover {
-  animation: logo-spin 1.5s;
-  animation-iteration-count: initial; 
+  animation: logo-spin 1.2s;
+  animation-iteration-count: infinite; 
   animation-direction: normal;
 }

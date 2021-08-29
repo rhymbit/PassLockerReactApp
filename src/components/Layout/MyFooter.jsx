@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Nav, Container } from "react-bootstrap";
-import instagramIcon from "../../icons/instagram.ico"
-import discordIcon from "../../icons/discord.ico"
-import githubIcon from "../../icons/github.ico"
+import instagramIcon from "../../icons/instagram.svg"
+import discordIcon from "../../icons/discord.svg"
+import githubIcon from "../../icons/github.svg"
 
 export default function MyFooter() {
 
