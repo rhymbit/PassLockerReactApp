@@ -68,6 +68,16 @@ header {
   margin: auto;
 }
 
+.add-password {
+  width: 100px;
+}
+
+.submit-cancel-button-row {
+  justify-content: space-evenly;
+  margin: auto 350px 10px 250px;
+}
+
+
 
 #footer {
   background: var(--gray5);
@@ -97,6 +107,11 @@ header {
 
   .dropdown-menu {
     max-width: 14em;
+  }
+
+  .submit-cancel-button-row {
+    justify-content: space-between;
+    margin: 1px 100px auto 100px;
   }
 }
 

@@ -61,7 +61,7 @@ function NewUserForm() {
       
             <div>
               <label>Password</label>
-              <input {...register("password")} />
+              <input type="password" {...register("password")} />
               {errors.password && <p>{errors.password.message}</p>}
             </div>
       

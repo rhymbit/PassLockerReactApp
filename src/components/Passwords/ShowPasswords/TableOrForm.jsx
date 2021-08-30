@@ -1,9 +1,7 @@
-import React, { useState } from "react"
-import { useEffect } from "react"
-import { Table } from "react-bootstrap"
+import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import PasswordsForm from "../../Forms/PasswordsForm"
-import PasswordsTable from "./PasswordsTable"
+import PasswordsForm from "../PasswordsForm/PasswordsEditForm"
+import PasswordsTable from "../PasswordsTable/PasswordsTable"
 
 export default function TableOrForm() {
 

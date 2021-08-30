@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setPasswordsUserId, setTokenFound } from "../../redux/passwordsSlice"
 import VerifyUserForm from "../Forms/VerifyUserForm"
-import ShowPasswords from "./ShowPasswords"
+import ShowPasswords from "./ShowPasswords/ShowPasswords"
 import VerifyToken from "./VerifyToken"
 import MyNavbar from "../Layout/MyNavbar"
 

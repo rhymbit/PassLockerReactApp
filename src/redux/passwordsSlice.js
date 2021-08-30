@@ -10,6 +10,7 @@ const initialState = {
   userVerified: false,
   userCredentialsWrong: false,
   userPasswords: null,
+  passwordsCount: 0,
   canShowPasswords: false,
 }
 
@@ -81,6 +82,10 @@ const passwordsSlice = createSlice({
       state.userPasswords = action.payload
     }, 
 
+    setPasswordsCount(state, action) {
+      state.passwordsCount = action.payload
+    },
+
     setCanShowPasswords(state, action) {
       state.canShowPasswords = action.payload
     }
@@ -110,9 +115,8 @@ const passwordsSlice = createSlice({
       })
 
       .addCase(getPasswords.fulfilled, (state, action) => {
-        console.log(`Passwords Fetched Successfully`)
-        console.log(action.payload)
         state.userPasswords = action.payload
+        state.passwordsCount = Object.keys(action.payload).length
         state.canShowPasswords = true
       })
 
@@ -138,12 +142,14 @@ export const {
   setUserVerified,
   setUserCredentialsWrong,
   setUserPasswords,
+  setPasswordsCount,
   setCanShowPasswords,
 } = passwordsSlice.actions
 
-export { 
+export {
   createVerificationUrl,
   verifyUser,
   verifyPasswordToken,
   getPasswords,
-  postPasswords, }
+  postPasswords,
+}
