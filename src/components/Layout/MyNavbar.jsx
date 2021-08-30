@@ -21,40 +21,46 @@ export default function MyNavbar() {
 
   return (
     <>
-      <Navbar sticky="top" bg="dark" variant="dark" expand="md">
+      <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
         <Container>
-              <Navbar.Brand>
-                  {icon(brandIcon, `brand-icon`, 30, 30)}
-                  PassLocker
-              </Navbar.Brand>
+          <Navbar.Brand>
+              {icon(brandIcon, `brand-icon`, 30, 30)}
+              PassLocker
+          </Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-            <Navbar.Collapse>
-                <Nav>
-                  <Link className="nav-link" to="/">
-                  {icon(homeIcon, `home-icon`, 22, 22)}
-                  Home
-                  </Link>
-                </Nav>
-                <Nav>
-                  <Nav.Link onClick={() => setModalShow(true)}>
-                  {icon(aboutIcon, `about-icon`, 22, 22)}
-                    About
-                  </Nav.Link>
-                </Nav>
-                  <About show={modalShow} onHide={() => setModalShow(false)}/>
+          <Navbar.Collapse>
 
-                <Nav>
-                  <Themes />
-                </Nav>
+            <Nav>
+              <Link className="nav-link" to="/">
+              {icon(homeIcon, `home-icon`, 22, 22)}
+              Home
+              </Link>
+            </Nav>
 
-                {
-                  isLoggedIn ?
+            <Nav>
+              <Nav.Link onClick={() => setModalShow(true)}>
+              {icon(aboutIcon, `about-icon`, 22, 22)}
+                About
+              </Nav.Link>
+                <About show={modalShow} onHide={() => setModalShow(false)}/>
+            </Nav>
+
+            <Col md={2} />
+            <Nav>
+              <Themes />
+            </Nav>
+            <Col md={isLoggedIn ? 2 : 4} />
+
+            <Nav>
+              {
+                isLoggedIn ?
                   <LoggedIn />
-                  :
+                :
                   <LoginButton />
-                }
+              }
+            </Nav>
 
             </Navbar.Collapse>
         </Container>

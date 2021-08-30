@@ -9,9 +9,7 @@ export default function LoginButton() {
         Login
       </Dropdown.Toggle>
       <Dropdown.Menu variant="dark">
-      
-          <LoginGoogle />
-        
+          <LoginGoogle />    
       </Dropdown.Menu>
     </Dropdown>
   )

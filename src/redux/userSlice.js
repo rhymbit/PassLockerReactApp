@@ -9,6 +9,7 @@ const initialState = {
   createUserUrl: `${apiUrl}/user/create-user`,
   userId: null,
   username: null,
+  gender: null,
   userData: null,
   isConfirmed: null,
   isNewUser: null,
@@ -72,14 +73,13 @@ const userSlice = createSlice({
         else {
           state.isNewUser = false
           state.username = action.payload.userName
+          state.gender = action.payload.gender
           state.isLoggedIn = true
           state.isConfirmed = action.payload.isConfirmed
           state.isGoogleLoggedIn =true
         }
         state.userData = action.payload
         state.userId = action.payload.userId
-        
-        console.log(state.userData)
       })
 
       .addCase(createUser.pending, (state, action) => {

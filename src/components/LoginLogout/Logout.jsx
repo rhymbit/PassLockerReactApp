@@ -13,10 +13,10 @@ export default function Logout() {
 
   return (
     <Button
+      className="logout-button"
       variant="secondary"
       href="/" 
       onClick={() => {onLogout(); onLogoutDeletePasswords();}}
-      className="d-inline-block align-top"
     >
       <img
         alt="LogoutIcon"
