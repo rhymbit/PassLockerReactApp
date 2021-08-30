@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import PasswordsForm from "../PasswordsForm/PasswordsEditForm"
+import { useDispatch, useSelector } from "react-redux"
+import { setPasswordsCount } from "../../../redux/passwordsSlice"
+import PasswordsEditForm from "../PasswordsForm/PasswordsEditForm"
 import PasswordsTable from "../PasswordsTable/PasswordsTable"
 
 export default function TableOrForm() {
+
+  const dispatch = useDispatch()
 
   const [editPasswords, setEditPasswords] = useState(false)
 
@@ -23,13 +26,15 @@ export default function TableOrForm() {
       )
     })
   
-  useEffect(() => {}, [userPasswords, editPasswords])
+  useEffect(() => {
+    dispatch(setPasswordsCount(Object.keys(userPasswords).length))
+  }, [userPasswords, editPasswords])
 
   return (
     <>
       {
         editPasswords ?
-          <PasswordsForm 
+          <PasswordsEditForm 
             userPasswords={userPasswords}
             setEditPasswords={setEditPasswords}
           />

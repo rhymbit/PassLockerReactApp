@@ -1,15 +1,13 @@
 import React from "react"
-import { useState } from "react"
-import { Container, Button, Form, Row, Col } from "react-bootstrap"
-import trashCan from "../../../icons/trashcan.svg"
+import { Button, Col, Container, Form, Row } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { createVerificationUrl, postPasswords, setUserPasswords } from "../../../redux/passwordsSlice"
 import AddPasswordsButton from "../AddPasswordsButton/AddPasswordsButton"
 import PasswordsInputBox from "./PasswordsInputBox"
 
 export default function PasswordsEditForm(props) {
 
-  const [data, setData] = useState({
-    abc: "123"
-  })
+  const dispatch = useDispatch()
 
   const {
     userPasswords,
@@ -18,17 +16,12 @@ export default function PasswordsEditForm(props) {
 
   const domainNames = Object.keys(userPasswords)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let domainNames = document.querySelectorAll(`input[domain]`)
-    domainNames.forEach(element => {
-      console.log(element.value)
-    });
-  }
+  const handleSubmit = useOnSubmit(setEditPasswords)
 
   return (
     <Form onSubmit={handleSubmit}>
       <Container>
+        
         {
           domainNames.map((domain, index) =>
             <PasswordsInputBox key={index} domain={domain} password={userPasswords[domain]} />  
@@ -54,4 +47,33 @@ export default function PasswordsEditForm(props) {
       </Container>
     </Form>
   )
+}
+
+function useOnSubmit(setEditPasswords) {
+  const dispatch = useDispatch()
+  const passwordCreateBackendUrl = useSelector(createVerificationUrl(`create-passwords`))
+  console.log(passwordCreateBackendUrl)
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const domainNames = document.querySelectorAll(`input[domain]`)
+    const passwords = document.querySelectorAll(`input[password]`)
+
+    let payload = {}
+
+    for (let i = 0; i < domainNames.length; i++) {
+      payload[domainNames[i].value] = passwords[i].value
+    }
+
+    dispatch(setUserPasswords(payload))
+    setEditPasswords(false)
+
+    dispatch(postPasswords({
+      url: passwordCreateBackendUrl,
+      payload: payload
+    }))
+  }
+
+  return onSubmit
 }

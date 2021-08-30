@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, Col, Form, Row } from "react-bootstrap"
+import { useDispatch } from "react-redux"
 import trashCanIcon from "../../../icons/trashcan.svg"
 import AddPasswordsButton from "../AddPasswordsButton/AddPasswordsButton"
 

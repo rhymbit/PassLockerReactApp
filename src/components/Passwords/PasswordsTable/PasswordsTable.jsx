@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import { Button, Container, Row, Table } from "react-bootstrap";
 
 export default function PasswordsTable(props) {
 

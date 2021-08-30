@@ -42,7 +42,7 @@ const verifyPasswordToken = createAsyncThunk('passwords/verifyToken',
 const getPasswords = createAsyncThunk('passwords/getPasswords',
     ({ url }) => { return get(url) })
 
-const postPasswords = createAsyncThunk(`passwords/create-passwords`,
+const postPasswords = createAsyncThunk(`passwords/createPasswords`,
     ({ url, payload }) => {
       try {
         const success = post(url, payload)
