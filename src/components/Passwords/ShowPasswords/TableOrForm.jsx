@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react"
+import { Button, Container, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { setPasswordsCount } from "../../../redux/passwordsSlice"
-import PasswordsEditForm from "../PasswordsForm/PasswordsEditForm"
-import PasswordsTable from "../PasswordsTable/PasswordsTable"
+import PasswordsEditForm from "./Form/PasswordsEditForm"
+import PasswordsTable from "./Table/PasswordsTable"
 
 export default function TableOrForm() {
 
   const dispatch = useDispatch()
-
   const [editPasswords, setEditPasswords] = useState(false)
-
-  const theme = useSelector(state => state.app.theme)
-
   const userPasswords = useSelector(state => state.passwords.userPasswords)
 
+  // domain names in an array
   const domainNames = Object.keys(userPasswords)
-
   const tableBody = domainNames.map((domain, index) => {
     return (
         <tr key={index}>
@@ -26,6 +23,7 @@ export default function TableOrForm() {
       )
     })
   
+    
   useEffect(() => {
     dispatch(setPasswordsCount(Object.keys(userPasswords).length))
   }, [userPasswords, editPasswords])
@@ -39,11 +37,17 @@ export default function TableOrForm() {
             setEditPasswords={setEditPasswords}
           />
         :
-          <PasswordsTable
-            setEditPasswords={setEditPasswords} 
-            theme={theme} 
-            tableBody={tableBody} 
-          />
+        <Container>
+
+          <Row className="mt-4 mt-md-4 justify-content-center">
+            <Button onClick={() => setEditPasswords(true)}>
+              Edit Passwords
+            </Button>
+          </Row>
+
+          <PasswordsTable tableBody={tableBody} />
+
+        </Container>
       }
     </>
   )

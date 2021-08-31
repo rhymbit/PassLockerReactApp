@@ -3,7 +3,6 @@ import { Col, Container, Row } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import MyNavbar from "../Layout/MyNavbar"
 import MyFooter from "../Layout/MyFooter"
-import ProfileCover from "./ProfileCover"
 
 function UserProfile() {
   const profPicUrl = useSelector(state => state.user.profilePictureUrl)
@@ -17,8 +16,6 @@ function UserProfile() {
   return (
     <>
       <MyNavbar />
-
-      <ProfileCover />
 
       <Container className="my-4">
         <Row>

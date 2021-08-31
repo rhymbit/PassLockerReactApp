@@ -1,21 +1,13 @@
-import React from "react";
+import React , { useEffect } from "react";
 import { Button, Container, Row, Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 export default function PasswordsTable(props) {
 
-  const {
-    setEditPasswords,
-    theme,
-    tableBody
-  } = {...props}
+  let theme = useSelector(state => state.app.theme)
 
   return (
-    <Container>
-        <Row className="mt-5 mt-md-5 justify-content-center">
-          <Button onClick={() => setEditPasswords(true)}>
-            Edit Passwords
-          </Button>
-        </Row>
+    <>
         <Row className="mt-4 mt-md-4">
           <Table
             striped 
@@ -32,10 +24,10 @@ export default function PasswordsTable(props) {
               </tr>
             </thead>
             <tbody>
-              {tableBody}
+              {props.tableBody}
             </tbody>
           </Table>
         </Row>
-    </Container>
+    </>
   )
 }

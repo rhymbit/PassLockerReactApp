@@ -11,7 +11,7 @@ const initialState = {
   userCredentialsWrong: false,
   userPasswords: null,
   passwordsCount: 0,
-  canShowPasswords: false,
+  passwordsAvailable: false,
 }
 
 const createVerificationUrl = endPoint => state => {
@@ -86,8 +86,8 @@ const passwordsSlice = createSlice({
       state.passwordsCount = action.payload
     },
 
-    setCanShowPasswords(state, action) {
-      state.canShowPasswords = action.payload
+    setPasswordsAvailable(state, action) {
+      state.passwordsAvailable = action.payload
     }
   },
 
@@ -101,14 +101,15 @@ const passwordsSlice = createSlice({
         state.userCredentialsWrong = false
 
       })
+
       .addCase(verifyUser.rejected, (state, action) => {
         state.userCredentialsWrong = true
       })
 
       .addCase(verifyPasswordToken.fulfilled, (state, action) => {
         state.userVerified = true
-
       })
+
       .addCase(verifyPasswordToken.rejected, (state, action) => {
         state.tokenFound = false
         localStorage.removeItem("passwordToken")
@@ -117,7 +118,7 @@ const passwordsSlice = createSlice({
       .addCase(getPasswords.fulfilled, (state, action) => {
         state.userPasswords = action.payload
         state.passwordsCount = Object.keys(action.payload).length
-        state.canShowPasswords = true
+        state.passwordsAvailable = true
       })
 
       .addCase(postPasswords.fulfilled, (state, action) => {
@@ -143,7 +144,7 @@ export const {
   setUserCredentialsWrong,
   setUserPasswords,
   setPasswordsCount,
-  setCanShowPasswords,
+  setPasswordsAvailable,
 } = passwordsSlice.actions
 
 export {

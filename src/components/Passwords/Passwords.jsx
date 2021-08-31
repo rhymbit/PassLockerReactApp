@@ -1,11 +1,10 @@
-import React from "react"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
+import { Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { setPasswordsUserId, setTokenFound } from "../../redux/passwordsSlice"
+import { createVerificationUrl, setPasswordsUserId, setTokenFound, verifyPasswordToken } from "../../redux/passwordsSlice"
 import VerifyUserForm from "../Forms/VerifyUserForm"
-import ShowPasswords from "./ShowPasswords/ShowPasswords"
-import VerifyToken from "./VerifyToken"
 import MyNavbar from "../Layout/MyNavbar"
+import ShowPasswords from "./ShowPasswords/ShowPasswords"
 
 export default function Passwords() {
   // set the userId in passwords slice,
@@ -24,6 +23,8 @@ export default function Passwords() {
   const userVerified = useSelector(state => state.passwords.userVerified)
   const tokenFound = useSelector(state => state.passwords.tokenFound)
 
+  const verifyToken = useVerifyToken()
+
   useEffect(() => {
   }, [userVerified, tokenFound])
 
@@ -39,7 +40,10 @@ export default function Passwords() {
           <>
             {
               tokenFound ?
-                <VerifyToken passwordToken={passwordToken}/>
+                <>
+                  {verifyToken(passwordToken)}
+                  <Spinner animation="border" />
+                </>
               :
                 <VerifyUserForm />
             }
@@ -47,6 +51,22 @@ export default function Passwords() {
       }
     </>
   )
+}
+
+function useVerifyToken() {
+  const dispatch = useDispatch()
+  const verifyTokenUrl = useSelector(createVerificationUrl(`verify-token`))
+
+  const verifyToken = (passwordToken) => {
+    dispatch(verifyPasswordToken({
+      url: verifyTokenUrl,
+      payload: {
+        googleToken: ``,
+        passwordToken: passwordToken
+      }
+    }))
+  }
+  return verifyToken
 }
 
 function useSetPasswordsUserId() {

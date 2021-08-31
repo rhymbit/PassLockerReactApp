@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setPasswordsCount } from "../../../redux/passwordsSlice";
-import PasswordsInputBox from "../PasswordsForm/InputBox/PasswordsInputBox";
+import PasswordsInputBox from "../ShowPasswords/Form/PasswordsInputBox";
 
 export default function AddPasswordsButton() {
 

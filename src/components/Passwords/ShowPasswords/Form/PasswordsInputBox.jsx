@@ -62,29 +62,3 @@ export default function PasswordsInputBox(props) {
     
   )
 }
-
-function formInputs(setTrashCan, setNewInput, domain="", password="") {
-  return (
-    <Row className="mt-5 mt-md-5 justify-content-center">
-      <Col xs={5} md={3}>
-        <Form.Control defaultValue={domain} domain={domain}/>
-      </Col>
-      <Col xs={5} md={4}>
-        <Form.Control defaultValue={password} password={password}/>
-        <Form.Text muted>Passwords must be 8-20 characters long</Form.Text>
-      </Col>
-      <Col xs={2} md={1}>
-        <Button variant="danger" onClick={() => { 
-          setTrashCan(true)
-          setNewInput(false)
-        }}>
-          <img
-            alt="trash-can-icon"
-            src={trashCanIcon}
-            width={25} height={25}
-          />
-        </Button>
-      </Col>
-    </Row>
-  )
-}

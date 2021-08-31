@@ -1,23 +1,44 @@
 import React, { useEffect } from "react"
-import { useSelector } from "react-redux"
-import PasswordsRequest from "../PasswordsRequest"
+import { Spinner } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { createVerificationUrl, getPasswords } from "../../../redux/passwordsSlice"
 import TableOrForm from "./TableOrForm"
 
 
 export default function ShowPasswords() {
   
-  const canShowPasswords = useSelector(state => state.passwords.canShowPasswords)
+  const passwordsAvailable = useSelector(state => state.passwords.passwordsAvailable)
 
-  useEffect(() => {}, [canShowPasswords])
+  const getPasswordsFromBackend = useGetPasswords()
+
+  useEffect(() => {
+
+  }, [passwordsAvailable])
 
   return (
     <>
       {
-        canShowPasswords ?
+        passwordsAvailable ?
           <TableOrForm />
         :
-          <PasswordsRequest />
+          <>
+            {getPasswordsFromBackend()}
+            <Spinner animation="border" />
+          </>
       }
     </>
   )
+}
+
+function useGetPasswords() {
+
+  const dispatch = useDispatch()
+  const getPasswordsUrl = useSelector(createVerificationUrl(`get-passwords`))
+  console.log(getPasswordsUrl)
+
+  const getPasswordsFromBackend = () => {
+    dispatch(getPasswords({ url: getPasswordsUrl }))
+  }
+
+  return getPasswordsFromBackend
 }
