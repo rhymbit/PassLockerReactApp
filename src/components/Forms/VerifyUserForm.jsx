@@ -54,7 +54,14 @@ export default function VerifyUserForm() {
         </div>
         
         <div>
-          <label>Secret</label>
+          <label>Secret Question</label>
+          <select {...register("secret")} >
+            <option value="">Your first pet?</option>
+            <option value="">Your birthplace?</option>
+            <option value="">Your favorite food?</option>
+            <option value="">Your favorite TV show?</option>
+          </select>
+          
           <input {...register("secret")} />
           {errors.secret && <p>{errors.secret.message}</p>}
         </div>

@@ -41,7 +41,7 @@ function NewUserForm() {
     <>
       {
         isNewUser ?
-        <>
+        <div>
           <Helmet>
             <link rel="stylesheet" type="text/css" href={`/css/reactform.css`} />
           </Helmet>
@@ -108,7 +108,7 @@ function NewUserForm() {
             </div>
       
           </form>
-        </>
+        </div>
         :
           <Redirect to='/' />
       }

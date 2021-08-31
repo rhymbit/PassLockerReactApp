@@ -87,10 +87,13 @@ const userSlice = createSlice({
 
       .addCase(createUser.fulfilled, (state, action) => {
         state.userData = action.payload
+        state.userId = action.payload.userId
         state.username = action.payload.userName
         state.isConfirmed = action.payload.isConfirmed
+        state.gender = action.payload.gender
         state.isNewUser = false
         state.isLoggedIn = true
+        state.isGoogleLoggedIn =true
       })
   }
 })

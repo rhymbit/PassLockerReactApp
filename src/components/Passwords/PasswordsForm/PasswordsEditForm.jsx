@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { createVerificationUrl, postPasswords, setUserPasswords } from "../../../redux/passwordsSlice"
 import AddPasswordsButton from "../AddPasswordsButton/AddPasswordsButton"
-import PasswordsInputBox from "./PasswordsInputBox"
+import PasswordsInputBox from "./InputBox/PasswordsInputBox"
 
 export default function PasswordsEditForm(props) {
 
