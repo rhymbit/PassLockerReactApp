@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React from "react";
-import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from "react-hook-form";
@@ -33,8 +32,6 @@ function NewUserForm() {
     data.email = userEmail
     data.name = name
     dispatch(createUser({url: urlCreateUserBackend, payload: data}))
-
-    console.log(data)
   }
 
   return (

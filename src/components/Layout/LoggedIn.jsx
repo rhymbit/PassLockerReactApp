@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import keyIcon from "../../icons/key.svg";
+import manAvatar from "../../icons/man-avatar.svg";
+import otherAvatar from "../../icons/other-avatar.svg";
+import womanAvatar from "../../icons/woman-avatar.svg";
 import Logout from "../LoginLogout/Logout";
-import manAvatar from "../../icons/man-avatar.svg"
-import womanAvatar from "../../icons/woman-avatar.svg"
-import otherAvatar from "../../icons/other-avatar.svg"
-import keyIcon from "../../icons/key.svg"
 
 export default function LoggedIn() {
   const username = useSelector(state => state.user.username)

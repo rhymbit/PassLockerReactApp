@@ -1,6 +1,6 @@
 import React from "react"
 import { Card, Col, Container, Row } from "react-bootstrap"
-import instagramLogo from "../../icons/twitter.svg"
+import twitterLogo from "../../icons/twitter.svg"
 
 export default function MainBody() {
 
@@ -48,7 +48,7 @@ export default function MainBody() {
             id={`service-card-${index}`}
             className="services"
           >
-            <Card.Img variant="top" src={instagramLogo} />
+            <Card.Img variant="top" src={twitterLogo} />
             <Card.Body className="services-text">
               <Card.Text>Something</Card.Text>
             </Card.Body>

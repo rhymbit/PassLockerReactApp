@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from '../src/components/App/App'
-
+import { HelmetProvider } from 'react-helmet-async'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
+import App from '../src/components/App/App'
 import store from '../src/redux/store'
 
-import { BrowserRouter as Router } from 'react-router-dom'
-import { HelmetProvider } from 'react-helmet-async'
+
 
 ReactDOM.render(
   <HelmetProvider>

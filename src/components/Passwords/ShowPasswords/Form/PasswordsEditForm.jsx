@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import { Button, Col, Container, Form, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { createVerificationUrl, postPasswords, setUserPasswords } from "../../../../redux/passwordsSlice"
@@ -7,23 +7,23 @@ import PasswordsInputBox from "./PasswordsInputBox"
 
 export default function PasswordsEditForm(props) {
 
-  const dispatch = useDispatch()
+  const form = useRef(null)
 
-  const {
-    userPasswords,
-    setEditPasswords
-  } = {...props}
+  const userPasswords = useSelector(state => state.passwords.userPasswords)
+  const domains = Object.keys(userPasswords)
 
-  const domainNames = Object.keys(userPasswords)
+  // `Edit Passwords` button setter
+  const { setEditPasswords } = {...props}
+
 
   const handleSubmit = useOnSubmit(setEditPasswords)
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form ref={form} onSubmit={handleSubmit}>
       <Container>
-        
+      
         {
-          domainNames.map((domain, index) =>
+          domains.map((domain, index) => 
             <PasswordsInputBox key={index} domain={domain} password={userPasswords[domain]} />  
           )
         }
@@ -52,7 +52,6 @@ export default function PasswordsEditForm(props) {
 function useOnSubmit(setEditPasswords) {
   const dispatch = useDispatch()
   const passwordCreateBackendUrl = useSelector(createVerificationUrl(`create-passwords`))
-  console.log(passwordCreateBackendUrl)
 
   const onSubmit = (e) => {
     e.preventDefault()

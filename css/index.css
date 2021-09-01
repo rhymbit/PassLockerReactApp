@@ -28,6 +28,12 @@ header {
   height: 180px;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .logo:hover {
+    animation: logo-spin infinite 2s linear;
+  }
+}
+
 .services {
   position: relative;
   background: var(--gray5);
@@ -77,6 +83,19 @@ header {
   margin: auto 350px 10px 250px;
 }
 
+.spinner-border {
+  display: flexbox;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: auto 50% auto 45%;
+}
+
+#linux-image {
+  display: flexbox;
+  width: 100%;
+  height: 500px;
+}
 
 
 #footer {
@@ -150,10 +169,4 @@ header {
   to {
     opacity: 0;
   }
-}
-
-.logo:hover {
-  animation: logo-spin 1.2s;
-  animation-iteration-count: infinite; 
-  animation-direction: normal;
 }

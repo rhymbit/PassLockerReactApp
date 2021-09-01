@@ -1,11 +1,10 @@
-import React from "react";
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from 'yup';
-import { useForm } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux";
+import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import * as yup from 'yup';
 import { createVerificationUrl, verifyUser } from "../../redux/passwordsSlice";
-import { useEffect } from "react";
 
 
 export default function VerifyUserForm() {

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useGoogleLogin } from "react-google-login"
-import { googleUserLogin, setUserProfilePictureUrl } from "../../redux//userSlice"
-import googleIcon from "../../icons/google.svg"
-import { Redirect } from 'react-router-dom';
 import { Dropdown } from "react-bootstrap"
+import { useGoogleLogin } from "react-google-login"
+import { useDispatch, useSelector } from "react-redux"
+import { Redirect } from 'react-router-dom'
+import googleIcon from "../../icons/google.svg"
+import { googleUserLogin, setUserProfilePictureUrl } from "../../redux//userSlice"
 
 
 export default function LoginGoogle() {

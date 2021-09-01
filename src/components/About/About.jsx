@@ -17,7 +17,11 @@ export default function About(props) {
       <Modal.Body>
         <h4>PassLocker</h4>
         <p>
-          Some stuff about PassLocker.
+          <p>This application let's you store your passwords or any other secrets very securely.</p>
+          <p>It encrypts all your secrets before storing it in the database, so even if some
+          Ninjas🥷 came into my house and steal my hard drives, your data won't be
+          compromised at all because it was all encrypted.</p>
+          <p>Although all of my games would be gone😭 </p>
         </p>
       </Modal.Body>
       <Modal.Footer>

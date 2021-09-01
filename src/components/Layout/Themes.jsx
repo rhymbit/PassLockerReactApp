@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { darkTheme, lightTheme } from "../../js/themes"
 import { setAppTheme } from "../../redux/appSlice"
-import { lightTheme, darkTheme } from "../../js/themes"
 
 export default function Themes() {
 

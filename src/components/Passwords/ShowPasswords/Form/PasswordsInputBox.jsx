@@ -1,24 +1,28 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, Col, Form, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import trashCanIcon from "../../../../icons/trashcan.svg"
-import AddPasswordsButton from "../../AddPasswordsButton/AddPasswordsButton"
 import { setPasswordsCount } from "../../../../redux/passwordsSlice"
+import AddPasswordsButton from "../../AddPasswordsButton/AddPasswordsButton"
 
 export default function PasswordsInputBox(props) {
-
-  const dispatch = useDispatch()
-  const passwordsCount = useSelector(state => state.passwords.passwordsCount)
 
   const [trashCan, setTrashCan] = useState(false)
 
   const { domain, password, isNewInput, setNewInput } = { ...props }
 
+  const deleteButton = useDeleteButton()
+
   const onDeleteClick = () => {
     setTrashCan(true)
     setNewInput(false)
-    dispatch(setPasswordsCount(passwordsCount - 1))
   }
+
+  useEffect(() => {
+    return () => {
+      deleteButton()
+    }
+  }, [])
 
   const form =
     <>
@@ -59,6 +63,12 @@ export default function PasswordsInputBox(props) {
         </>
       }
     </>
-    
   )
+}
+
+function useDeleteButton() {
+  const passwordsCount = useSelector(state => state.passwords.passwordsCount)
+  const dispatch = useDispatch()
+  const deleteB = () => dispatch(setPasswordsCount(passwordsCount-1))
+  return deleteB
 }

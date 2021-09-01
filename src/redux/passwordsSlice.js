@@ -12,6 +12,7 @@ const initialState = {
   userPasswords: null,
   passwordsCount: 0,
   passwordsAvailable: false,
+  noOfPasswordsAllowed: 10,
 }
 
 const createVerificationUrl = endPoint => state => {
@@ -95,7 +96,6 @@ const passwordsSlice = createSlice({
     builder
 
       .addCase(verifyUser.fulfilled, (state, action) =>{
-        console.log(action.payload)
         localStorage.setItem(`passwordToken`, action.payload)
         state.userVerified = true
         state.userCredentialsWrong = false
@@ -122,13 +122,10 @@ const passwordsSlice = createSlice({
       })
 
       .addCase(postPasswords.fulfilled, (state, action) => {
-        console.log(`Passwords Created Successfully`)
-        console.log(action.payload)
         state.canShowPasswords = true
       })
 
       .addCase(postPasswords.rejected, (state, action) => {
-        console.log(`Could not create passwords`)
       })
   }
 })

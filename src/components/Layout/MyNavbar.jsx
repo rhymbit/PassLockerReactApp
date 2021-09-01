@@ -1,15 +1,14 @@
 import React, { useState } from "react"
-import { Col, Container, Nav, Navbar, Row } from "react-bootstrap"
+import { Col, Container, Nav, Navbar } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import aboutIcon from "../../icons/about.svg"
+import brandIcon from "../../icons/brandIcon.svg"
+import homeIcon from "../../icons/home.svg"
 import About from "../About/About"
 import LoggedIn from "./LoggedIn"
 import LoginButton from "./LoginButton"
 import Themes from "./Themes"
-import brandIcon from "../../icons/brandIcon.svg"
-import homeIcon from "../../icons/home.svg"
-import aboutIcon from "../../icons/about.svg"
-import context from "react-bootstrap/esm/AccordionContext"
 
 
 export default function MyNavbar() {

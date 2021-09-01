@@ -34,7 +34,6 @@ function useGetPasswords() {
 
   const dispatch = useDispatch()
   const getPasswordsUrl = useSelector(createVerificationUrl(`get-passwords`))
-  console.log(getPasswordsUrl)
 
   const getPasswordsFromBackend = () => {
     dispatch(getPasswords({ url: getPasswordsUrl }))

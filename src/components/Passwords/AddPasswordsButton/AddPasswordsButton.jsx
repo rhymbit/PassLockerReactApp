@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setPasswordsCount } from "../../../redux/passwordsSlice";
@@ -9,6 +8,7 @@ export default function AddPasswordsButton() {
 
   const dispatch = useDispatch()
   const passwordsCount = useSelector(state => state.passwords.passwordsCount)
+  const noOfPasswordsAllowed = useSelector(state => state.passwords.noOfPasswordsAllowed)
   const [newInput, setNewInput] = useState(false)
 
 
@@ -26,8 +26,6 @@ export default function AddPasswordsButton() {
     </Row>
   </>
 
-  useEffect(() => {}, [passwordsCount])
-
   return (
     <>
       {
@@ -43,7 +41,7 @@ export default function AddPasswordsButton() {
         :
         <>
           {
-            passwordsCount < 5 ?
+            passwordsCount < noOfPasswordsAllowed ?
               button
             :
               null

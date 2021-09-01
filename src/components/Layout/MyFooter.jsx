@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Nav, Container } from "react-bootstrap";
-import instagramIcon from "../../icons/instagram.svg"
-import discordIcon from "../../icons/discord.svg"
-import githubIcon from "../../icons/github.svg"
+import { Card, Container, Nav } from "react-bootstrap";
+import discordIcon from "../../icons/discord.svg";
+import githubIcon from "../../icons/github.svg";
+import instagramIcon from "../../icons/instagram.svg";
 
 export default function MyFooter() {
 
@@ -16,7 +16,7 @@ export default function MyFooter() {
     <Card
       id="footer"
     >
-      <Card.Header>About me 👋</Card.Header>
+      <Card.Header>Hello👋, I'm Prateek and I created this website. Thanks for visiting.</Card.Header>
 
       <Nav className="justify-content-center" variant="pills">
 
@@ -61,7 +61,8 @@ export default function MyFooter() {
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p>
-            Some stuff about me.
+            Want to know more about me? Just hit me up in one of the above mentioned social apps
+            and we'll have a chat.
           </p>
 
           <footer className="blockquote-footer">
