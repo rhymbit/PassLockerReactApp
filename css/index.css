@@ -24,8 +24,8 @@ header {
 
 .logo {
   margin: 2em;
-  width: 180px;
-  height: 180px;
+  width: 250px;
+  height: 260px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -39,7 +39,7 @@ header {
   background: var(--gray5);
   color: var(--gray0);
   border-radius: 2em;
-  width: 13rem;
+  width: 15rem;
   transition: var(--transitionSmooth)
 }
 
@@ -48,10 +48,18 @@ header {
   transition: 700ms;
 }
 
+.services  img {
+  padding: 2rem;
+}
+
+.services-text h5 {
+  font-weight: bold;
+}
+
 .services-text {
-  max-width: 195px;
-  cursor: none;
-  margin-top: 50px;
+  width: 200px;
+  max-width: 200px;
+  margin-top: 5px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -59,9 +67,12 @@ header {
   opacity: 0;
 }
 
-
 .services:hover .card-img-top {
-  opacity: 0.5;
+  opacity: 0.2;
+}
+
+.services h3 {
+  font-weight: bold;
 }
 
 .services:hover .services-text {
@@ -99,8 +110,10 @@ header {
 
 
 #footer {
+  width: 80rem;
   background: var(--gray5);
   color: var(--gray0);
+  margin-top: 7rem;
   transition: var(--transitionSmooth)
 }
 

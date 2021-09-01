@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import keyIcon from "../../icons/key.svg";
 import manAvatar from "../../icons/man-avatar.svg";
-import otherAvatar from "../../icons/other-avatar.svg";
+import otherAvatar from "../../icons/service0.svg";
 import womanAvatar from "../../icons/woman-avatar.svg";
 import Logout from "../LoginLogout/Logout";
 
