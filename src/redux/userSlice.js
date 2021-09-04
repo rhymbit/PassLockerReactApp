@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit"
 import post from "../js/post"
+import deleteFunc from "../js/delete"
 
 const apiUrl = `https://localhost:5001/api`
 
@@ -7,6 +8,7 @@ const initialState = {
   googleClientId: `511938303606-cgsinc6m12udh4mtj5bdmva3l4at3i7v.apps.googleusercontent.com`,
   googleLoginUrl: `${apiUrl}/login/google-login`,
   createUserUrl: `${apiUrl}/user/create-user`,
+  deleteUserUrl: `${apiUrl}/user/delete-user`,
   userId: null,
   username: null,
   gender: null,
@@ -18,6 +20,11 @@ const initialState = {
   profilePictureUrl: null,
 }
 
+const createUserControllerUrl = endpoint => state => {
+  const { userId } = state.user
+  return `${apiUrl}/${userId}/${endpoint}`
+}
+
 const googleUserLogin = createAsyncThunk('user/googleUserLogin',
     ({ url, payload }) => {
       return post(url, payload)
@@ -26,6 +33,16 @@ const googleUserLogin = createAsyncThunk('user/googleUserLogin',
 const createUser = createAsyncThunk('user/createUser',
     ({url, payload}) => {
       return post(url, payload)
+  })
+
+const deleteUser = createAsyncThunk('user/deleteUser',
+  ({url, payload}) => {
+    try {
+      const data = deleteFunc(url, payload)
+      return data
+    } catch (err) {
+      return isRejectedWithValue(err)
+    }
   })
 
 const userSlice = createSlice({
@@ -95,6 +112,16 @@ const userSlice = createSlice({
         state.isLoggedIn = true
         state.isGoogleLoggedIn =true
       })
+      
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        console.log("User Deleted Successfully")
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        console.log("Cannot delete user, some shit wrong at backend")
+        console.log(action.payload)
+      })
+
+      
   }
 })
 
@@ -109,4 +136,9 @@ export const {
   setUserProfilePictureUrl,
 } = userSlice.actions
 
-export { googleUserLogin, createUser }
+export { 
+  createUserControllerUrl,
+  googleUserLogin, 
+  createUser, 
+  deleteUser,
+}

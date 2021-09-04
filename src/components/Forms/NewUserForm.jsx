@@ -93,7 +93,7 @@ function NewUserForm() {
       
             <div>
               <label>Your Name</label>
-              <input {...register("name")} defaultValue={name} disabled />
+              <input {...register("name")} defaultValue={name} />
             </div>
             <div>
               <label>Your Email</label>

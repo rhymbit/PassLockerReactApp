@@ -1,12 +1,13 @@
 import React, { useEffect } from "react"
-import { Col, Container, Row } from "react-bootstrap"
+import { Button, Col, Container, Row } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import MyFooter from "../Layout/MyFooter"
 import MyNavbar from "../Layout/MyNavbar"
+import DeleteProfile from "./DeleteProfile"
 
 function UserProfile() {
   const profPicUrl = useSelector(state => state.user.profilePictureUrl)
-  const username = useSelector(state => state.user.userName)
+  const username = useSelector(state => state.user.username)
   const userData = useSelector(state => state.user.userData)
   
   useEffect(() => {
@@ -37,11 +38,16 @@ function UserProfile() {
             <h5>Gender: {userData.gender}</h5>
           </Col>
         </Row>
-      
-        <img
-          id="linux-image"
-          src="https://initiate.alphacoders.com/images/221/stretched-1366-768-221297.png?9769"
-        />
+
+        <Row>
+          <Col className="my-4" md={2}>
+            <Button>Edit Profile</Button>
+          </Col>
+          <Col className="my-4" md={2}>
+            <DeleteProfile />
+          </Col>
+        </Row>
+  
 
       </Container>
       

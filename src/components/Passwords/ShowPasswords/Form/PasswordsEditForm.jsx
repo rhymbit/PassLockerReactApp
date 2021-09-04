@@ -51,7 +51,11 @@ export default function PasswordsEditForm(props) {
 
 function useOnSubmit(setEditPasswords) {
   const dispatch = useDispatch()
-  const passwordCreateBackendUrl = useSelector(createVerificationUrl(`create-passwords`))
+
+  let postPasswordsUrlWithoutToken = useSelector(createVerificationUrl(`create-passwords`))
+
+  const postPasswordsUrlWithToken =
+    `${postPasswordsUrlWithoutToken}?token=${localStorage.getItem('passwordToken')}`
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -69,7 +73,7 @@ function useOnSubmit(setEditPasswords) {
     setEditPasswords(false)
 
     dispatch(postPasswords({
-      url: passwordCreateBackendUrl,
+      url: postPasswordsUrlWithToken,
       payload: payload
     }))
   }

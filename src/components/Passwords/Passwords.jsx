@@ -61,7 +61,6 @@ function useVerifyToken() {
     dispatch(verifyPasswordToken({
       url: verifyTokenUrl,
       payload: {
-        googleToken: ``,
         passwordToken: passwordToken
       }
     }))

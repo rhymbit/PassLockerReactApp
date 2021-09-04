@@ -15,7 +15,7 @@ const initialState = {
   noOfPasswordsAllowed: 10,
 }
 
-const createVerificationUrl = endPoint => state => {
+const createPasswordControllerUrl = endPoint => state => {
   const { userId } = state.passwords
   return `${apiUrl}/${userId}/${endPoint}`
 }
@@ -24,7 +24,6 @@ const verifyUser = createAsyncThunk('passwords/verifyUser',
     ({ url, payload }) => {
       try {
         const data = post(url, payload)
-        return data
       } catch (err) {
         return isRejectedWithValue(err)
       }
@@ -41,7 +40,14 @@ const verifyPasswordToken = createAsyncThunk('passwords/verifyToken',
   })
 
 const getPasswords = createAsyncThunk('passwords/getPasswords',
-    ({ url }) => { return get(url) })
+    ({ url }) => { 
+      try {
+        const data = get(url)
+        return data
+      } catch (err) {
+        return isRejectedWithValue(err)
+      }
+     })
 
 const postPasswords = createAsyncThunk(`passwords/createPasswords`,
     ({ url, payload }) => {
@@ -121,6 +127,9 @@ const passwordsSlice = createSlice({
         state.passwordsAvailable = true
       })
 
+      .addCase(getPasswords.rejected, (state, action) => {
+      })
+
       .addCase(postPasswords.fulfilled, (state, action) => {
         state.canShowPasswords = true
       })
@@ -145,7 +154,7 @@ export const {
 } = passwordsSlice.actions
 
 export {
-  createVerificationUrl,
+  createPasswordControllerUrl,
   verifyUser,
   verifyPasswordToken,
   getPasswords,

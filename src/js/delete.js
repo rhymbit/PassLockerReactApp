@@ -1,8 +1,8 @@
-async function get(url = '') {
+async function deleteFunc(url = '', payload = {}) {
   const options = {
-    method: 'GET',
+    method: 'DELETE',
     headers: {
-      'Content-Type' : 'application/json',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
     }
   }
@@ -13,9 +13,9 @@ async function get(url = '') {
     return await response.json()
   }
   else {
-    console.log(`Error in 'server/shared/getData.js' = ${response.status}`)
+    console.log(`Error in deleteFunc.js' = ${response.status}`)
     throw response.status
   }
 }
 
-export default get
+export default deleteFunc

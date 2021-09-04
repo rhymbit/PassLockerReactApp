@@ -33,10 +33,14 @@ export default function ShowPasswords() {
 function useGetPasswords() {
 
   const dispatch = useDispatch()
-  const getPasswordsUrl = useSelector(createVerificationUrl(`get-passwords`))
+
+  let getPasswordsUrlWithoutToken = useSelector(createVerificationUrl(`get-passwords`))
+  
+  const getPasswordsUrlWithToken = 
+    `${getPasswordsUrlWithoutToken}?token=${localStorage.getItem('passwordToken')}`
 
   const getPasswordsFromBackend = () => {
-    dispatch(getPasswords({ url: getPasswordsUrl }))
+    dispatch(getPasswords({ url: getPasswordsUrlWithToken }))
   }
 
   return getPasswordsFromBackend
