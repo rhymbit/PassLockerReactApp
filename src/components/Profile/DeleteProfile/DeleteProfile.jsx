@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux"
 import { setUserVerified } from "../../../redux/passwordsSlice"
+import DeleteProfileBackend from "./DeleteProfileBackend"
 
 export default function DeleteProfile() {
 
@@ -12,9 +12,9 @@ export default function DeleteProfile() {
 
   return (
     deleteButtonClicked ?
-      <Button variant="danger" onClick={onClick}>Delete Profile</Button>
+      <DeleteProfileBackend />
     :
-      <></>
+      <Button variant="danger" onClick={onClick}>Delete Profile</Button>
   )
 }
 

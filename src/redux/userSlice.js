@@ -8,7 +8,6 @@ const initialState = {
   googleClientId: `511938303606-cgsinc6m12udh4mtj5bdmva3l4at3i7v.apps.googleusercontent.com`,
   googleLoginUrl: `${apiUrl}/login/google-login`,
   createUserUrl: `${apiUrl}/user/create-user`,
-  deleteUserUrl: `${apiUrl}/user/delete-user`,
   userId: null,
   username: null,
   gender: null,
@@ -36,9 +35,9 @@ const createUser = createAsyncThunk('user/createUser',
   })
 
 const deleteUser = createAsyncThunk('user/deleteUser',
-  ({url, payload}) => {
-    try {
-      const data = deleteFunc(url, payload)
+  ({ url }) => {
+     try{ 
+      const data = deleteFunc(url)
       return data
     } catch (err) {
       return isRejectedWithValue(err)

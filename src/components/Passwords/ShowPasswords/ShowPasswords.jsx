@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { createVerificationUrl, getPasswords } from "../../../redux/passwordsSlice"
+import { createPasswordControllerUrl, getPasswords } from "../../../redux/passwordsSlice"
 import TableOrForm from "./TableOrForm"
 
 
@@ -34,7 +34,7 @@ function useGetPasswords() {
 
   const dispatch = useDispatch()
 
-  let getPasswordsUrlWithoutToken = useSelector(createVerificationUrl(`get-passwords`))
+  let getPasswordsUrlWithoutToken = useSelector(createPasswordControllerUrl(`get-passwords`))
   
   const getPasswordsUrlWithToken = 
     `${getPasswordsUrlWithoutToken}?token=${localStorage.getItem('passwordToken')}`

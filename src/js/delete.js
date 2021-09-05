@@ -1,4 +1,4 @@
-async function deleteFunc(url = '', payload = {}) {
+async function deleteFunc(url = '') {
   const options = {
     method: 'DELETE',
     headers: {

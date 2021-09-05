@@ -1,30 +1,38 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { deleteUser } from "../../../redux/userSlice";
+import React from "react";
+import { Route, Switch } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
+import { createUserControllerUrl, deleteUser } from "../../../redux/userSlice";
 import VerifyUserForm from "../../Forms/VerifyUserForm";
 
 export default function DeleteProfileBackend() {
   const userVerified = useSelector(state => state.passwords.userVerified)
 
+  const deleteUser = useDeleteUser()
+
   return (
     userVerified ?
-
-    <VerifyUserForm />
+      <>
+          {deleteUser()}
+          <Redirect to="/" />
+      </>
+    :
+      <></>
+      
   )
 }
 
 function useDeleteUser() {
   const dispatch = useDispatch()
-  const userDeleteUrl = useSelector(state => state.user.userDeleteUrl)
-
-  const payload = {
-    userToken: localStorage.getItem('passwordToken')
-  }
+  const userDeleteUrlWithoutToken = useSelector(createUserControllerUrl(`delete-user`))
+  const userDeleteUrlWithToken =
+    `${userDeleteUrlWithoutToken}?token=${localStorage.getItem(`passwordToken`)}`
 
   const deleteUserFromBackend = () => {
     dispatch(deleteUser({
-      url: userDeleteUrl,
-      payload: payload
+      url: userDeleteUrlWithToken,
     }))
   }
+
+  return deleteUserFromBackend
 }

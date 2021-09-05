@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { createVerificationUrl, setPasswordsUserId, setTokenFound, verifyPasswordToken } from "../../redux/passwordsSlice"
+import { createPasswordControllerUrl, setPasswordsUserId, setTokenFound, verifyPasswordToken } from "../../redux/passwordsSlice"
 import VerifyUserForm from "../Forms/VerifyUserForm"
 import MyNavbar from "../Layout/MyNavbar"
 import ShowPasswords from "./ShowPasswords/ShowPasswords"
@@ -55,7 +55,7 @@ export default function Passwords() {
 
 function useVerifyToken() {
   const dispatch = useDispatch()
-  const verifyTokenUrl = useSelector(createVerificationUrl(`verify-token`))
+  const verifyTokenUrl = useSelector(createPasswordControllerUrl(`verify-token`))
 
   const verifyToken = (passwordToken) => {
     dispatch(verifyPasswordToken({
