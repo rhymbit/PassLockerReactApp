@@ -18,7 +18,7 @@ function App() {
         <NewUserForm />
       </Route>
 
-      <Route exact path={profilePageUrl}>
+      <Route path={profilePageUrl}>
         <Profile />
       </Route>
 

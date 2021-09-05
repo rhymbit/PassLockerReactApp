@@ -17,6 +17,8 @@ const initialState = {
   isLoggedIn: false,
   isGoogleLoggedIn: false,
   profilePictureUrl: null,
+  userDeleteProfile: false,
+  userEditProfile: false
 }
 
 const createUserControllerUrl = endpoint => state => {
@@ -114,6 +116,7 @@ const userSlice = createSlice({
       
       .addCase(deleteUser.fulfilled, (state, action) => {
         console.log("User Deleted Successfully")
+        state.userDeleteProfile = true
       })
       .addCase(deleteUser.rejected, (state, action) => {
         console.log("Cannot delete user, some shit wrong at backend")
@@ -137,7 +140,7 @@ export const {
 
 export { 
   createUserControllerUrl,
-  googleUserLogin, 
+  googleUserLogin,
   createUser, 
   deleteUser,
 }

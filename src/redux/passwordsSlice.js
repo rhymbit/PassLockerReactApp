@@ -24,6 +24,7 @@ const verifyUser = createAsyncThunk('passwords/verifyUser',
     ({ url, payload }) => {
       try {
         const data = post(url, payload)
+        return data
       } catch (err) {
         return isRejectedWithValue(err)
       }
@@ -105,7 +106,6 @@ const passwordsSlice = createSlice({
         localStorage.setItem(`passwordToken`, action.payload)
         state.userVerified = true
         state.userCredentialsWrong = false
-
       })
 
       .addCase(verifyUser.rejected, (state, action) => {

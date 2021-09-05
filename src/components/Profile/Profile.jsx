@@ -2,6 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { useRouteMatch } from "react-router"
 import { Route, Switch } from "react-router-dom"
+import ShowProfile from "./ShowProfile/ShowProfile"
 
 function UserProfile() {
 
@@ -11,11 +12,11 @@ function UserProfile() {
 
   return (
     <Switch>
-      <Route path={`${match.path}/edit-profile`}></Route>
+      <Route path={`${match.path}/edit-profile`}>Edit Profile</Route>
 
       <Route path={`${match.path}/delete-profile`}></Route>
 
-      <Route path={`${match.path}`}>lajsdfjasdlf</Route>
+      <Route path={`${match.path}`}><ShowProfile /></Route>
 
     </Switch>
   )

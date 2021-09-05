@@ -7,9 +7,6 @@ import MyNavbar from "../Layout/MyNavbar"
 import ShowPasswords from "./ShowPasswords/ShowPasswords"
 
 export default function Passwords() {
-  // set the userId in passwords slice,
-  // which is required to create verification url's
-  useSetPasswordsUserId()
 
   const dispatch = useDispatch()
 
@@ -66,12 +63,4 @@ function useVerifyToken() {
     }))
   }
   return verifyToken
-}
-
-function useSetPasswordsUserId() {
-  const dispatch = useDispatch()
-  const userId = useSelector(state => state.user.userId)
-  if (userId != null) {
-    dispatch(setPasswordsUserId(userId))
-  }
 }
