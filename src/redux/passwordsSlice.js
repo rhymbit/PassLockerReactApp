@@ -21,9 +21,10 @@ const createPasswordControllerUrl = endPoint => state => {
 }
 
 const verifyUser = createAsyncThunk('passwords/verifyUser',
-    ({ url, payload }) => {
+    ({ url, payload, setState=null, state=null }) => {
       try {
         const data = post(url, payload)
+        setState && setState(state)
         return data
       } catch (err) {
         return isRejectedWithValue(err)

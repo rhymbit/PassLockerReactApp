@@ -4,12 +4,11 @@ import { Helmet } from 'react-helmet-async';
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from 'yup';
-import { createPasswordControllerUrl, verifyUser, setPasswordsUserId } from "../../redux/passwordsSlice";
+import { createPasswordControllerUrl, setPasswordsUserId, verifyUser } from "../../redux/passwordsSlice";
 
 
-export default function VerifyUserForm() {
+export default function VerifyUserForm(props) {
 
-  
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: yupResolver(schema)
   })
@@ -23,15 +22,27 @@ export default function VerifyUserForm() {
 
   const userCredentialsWrong = useSelector(state => state.passwords.userCredentialsWrong)
 
-  const onSubmit = (data) => {
+  const onSubmit = (formData) => {
     const credentials = {
-      password: data.password,
-      secret: data.secret
+      password: formData.password,
+      secret: formData.secret
     }
 
-    dispatch(verifyUser({
-      url: verifyUserUrl, payload: credentials
-    }))
+    const dispatchOptions = 
+      props.setState ?
+        {
+          url: verifyUserUrl,
+          payload: credentials,
+          setState: props.setState,
+          state: props.state
+        }
+      :
+        {
+          url: verifyUserUrl,
+          payload: credentials
+        }
+
+    dispatch(verifyUser(dispatchOptions))
   }
 
   useEffect(() => {}, [userCredentialsWrong])
