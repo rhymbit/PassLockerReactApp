@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit"
-import post from "../js/post"
 import deleteFunc from "../js/delete"
+import post from "../js/post"
 
 const apiUrl = `https://localhost:5001/api/user`
 
@@ -91,6 +91,8 @@ const userSlice = createSlice({
       .addCase(googleUserLogin.pending, (state, action) => {})
 
       .addCase(googleUserLogin.fulfilled, (state, action) => {
+        state.userId = action.payload.userId
+        state.userData = action.payload
         // a new user, visiting site for the first time
         if (Number(action.payload.userId) === 0) {
           state.isNewUser = true
@@ -106,8 +108,6 @@ const userSlice = createSlice({
           state.isConfirmed = action.payload.isConfirmed
           state.isGoogleLoggedIn =true
         }
-        state.userData = action.payload
-        state.userId = action.payload.userId
       })
 
       .addCase(createUser.pending, (state, action) => {
@@ -156,10 +156,11 @@ export const {
   setUserProfilePictureUrl,
 } = userSlice.actions
 
-export { 
+export {
   createUserControllerUrl,
   googleUserLogin,
   createUser,
   verifyUser,
   deleteProfile,
 }
+

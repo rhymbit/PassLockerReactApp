@@ -12,14 +12,12 @@ export default function LoginGoogle() {
   const signIn = useLogin()
 
   const isNewUser = useSelector(state => state.user.isNewUser)
-  
-  useEffect(() => {}, [isNewUser])
 
   return (
     <>
       {
         isNewUser ?
-          <Redirect to="/new-user" />
+          <Redirect to="new-user" />
         :
           <Dropdown.Item onClick={signIn}>
             <img

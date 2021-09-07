@@ -1,21 +1,20 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import NewUserForm from '../Forms/NewUserForm'
 import HomePage from '../Homepage/Homepage'
-import Passwords from '../Passwords/Passwords'
+import NewUser from '../NewUser/NewUser'
 import Profile from '../Profile/Profile'
 
 function App() {
   
   const username = useSelector(state => state.user.username)
-  let profilePageUrl = username != null ? `/${username}` : `/user-not-logged-in`
+  const profilePageUrl = username != null ? `/${username}` : `/forbidden`
 
   return (
     <Switch>
 
       <Route path="/new-user">
-        <NewUserForm />
+        <NewUser />
       </Route>
 
       <Route path={profilePageUrl}>
