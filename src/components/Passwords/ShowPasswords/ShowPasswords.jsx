@@ -34,10 +34,10 @@ function useGetPasswords() {
 
   const dispatch = useDispatch()
 
-  let getPasswordsUrlWithoutToken = useSelector(createPasswordControllerUrl(`get-passwords`))
+  const getPasswordsUrlWithoutToken = useSelector(createPasswordControllerUrl(`get-passwords`))
   
   const getPasswordsUrlWithToken = 
-    `${getPasswordsUrlWithoutToken}?token=${localStorage.getItem('passwordToken')}`
+    `${getPasswordsUrlWithoutToken}?token=${localStorage.getItem('verificationToken')}`
 
   const getPasswordsFromBackend = () => {
     dispatch(getPasswords({ url: getPasswordsUrlWithToken }))

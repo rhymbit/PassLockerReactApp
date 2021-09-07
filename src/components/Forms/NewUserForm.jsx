@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as yup from 'yup';
-import { createUser } from '../../redux/userSlice';
+import { createUser, createUserControllerUrl } from '../../redux/userSlice';
 
 function NewUserForm() {
 
@@ -25,7 +25,7 @@ function NewUserForm() {
     userEmail = userData.userEmail
   }
 
-  const urlCreateUserBackend = useSelector(state => state.user.createUserUrl)
+  const urlCreateUserBackend = useSelector(createUserControllerUrl(`create-user`))
   const dispatch = useDispatch()
   
   const onSubmit = data => {

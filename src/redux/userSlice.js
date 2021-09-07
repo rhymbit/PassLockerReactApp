@@ -2,28 +2,28 @@ import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/too
 import post from "../js/post"
 import deleteFunc from "../js/delete"
 
-const apiUrl = `https://localhost:5001/api`
+const apiUrl = `https://localhost:5001/api/user`
 
 const initialState = {
-  googleClientId: `511938303606-cgsinc6m12udh4mtj5bdmva3l4at3i7v.apps.googleusercontent.com`,
-  googleLoginUrl: `${apiUrl}/login/google-login`,
-  createUserUrl: `${apiUrl}/user/create-user`,
   userId: null,
   username: null,
   gender: null,
   userData: null,
   isConfirmed: null,
+
   isNewUser: null,
   isLoggedIn: false,
   isGoogleLoggedIn: false,
+
   profilePictureUrl: null,
-  userDeleteProfile: false,
-  userEditProfile: false
+
+  canDeleteProfile: false,
+  canEditProfile: false,
 }
 
 const createUserControllerUrl = endpoint => state => {
   const { userId } = state.user
-  return `${apiUrl}/${userId}/${endpoint}`
+  return userId ? `${apiUrl}/${userId}/${endpoint}` : `${apiUrl}/${endpoint}`
 }
 
 const googleUserLogin = createAsyncThunk('user/googleUserLogin',
@@ -36,7 +36,17 @@ const createUser = createAsyncThunk('user/createUser',
       return post(url, payload)
   })
 
-const deleteUser = createAsyncThunk('user/deleteUser',
+const verifyUser = createAsyncThunk('passwords/verifyUser',
+  ({ url, payload }) => {
+    try {
+      const data = post(url, payload)
+      return data
+    } catch (err) {
+      return isRejectedWithValue(err)
+    }
+  })
+
+const deleteProfile = createAsyncThunk('user/deleteProfile',
   ({ url }) => {
      try{ 
       const data = deleteFunc(url)
@@ -113,12 +123,20 @@ const userSlice = createSlice({
         state.isLoggedIn = true
         state.isGoogleLoggedIn =true
       })
-      
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        console.log("User Deleted Successfully")
-        state.userDeleteProfile = true
+
+      .addCase(verifyUser.fulfilled, (state, action) => {
+        state.canDeleteProfile = true
       })
-      .addCase(deleteUser.rejected, (state, action) => {
+
+      .addCase(verifyUser.rejected, (state, action) => {
+        console.log("Failed to verify user")
+      })
+      
+      .addCase(deleteProfile.fulfilled, (state, action) => {
+        console.log("User Deleted Successfully")
+        state.canDeleteProfile = true
+      })
+      .addCase(deleteProfile.rejected, (state, action) => {
         console.log("Cannot delete user, some shit wrong at backend")
         console.log(action.payload)
       })
@@ -141,6 +159,7 @@ export const {
 export { 
   createUserControllerUrl,
   googleUserLogin,
-  createUser, 
-  deleteUser,
+  createUser,
+  verifyUser,
+  deleteProfile,
 }

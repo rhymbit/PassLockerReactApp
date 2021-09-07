@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Redirect } from 'react-router-dom'
 import googleIcon from "../../icons/google.svg"
 import { googleUserLogin, setUserProfilePictureUrl } from "../../redux//userSlice"
+import { createBackendUrl } from "../../redux/appSlice"
 
 
 export default function LoginGoogle() {
@@ -37,8 +38,8 @@ export default function LoginGoogle() {
 
 function useLogin() {
   const dispatch = useDispatch()
-  const clientId = useSelector(state => state.user.googleClientId)
-  const urlLoginBackend = useSelector(state => state.user.googleLoginUrl)
+  const clientId = useSelector(state => state.app.googleClientId)
+  const urlLoginBackend = useSelector(createBackendUrl(`login/google-login`))
 
   const { signIn } = useGoogleLogin({
     clientId: clientId,

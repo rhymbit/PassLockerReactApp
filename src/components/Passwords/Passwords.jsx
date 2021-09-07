@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { createPasswordControllerUrl, setPasswordsUserId, setTokenFound, verifyPasswordToken } from "../../redux/passwordsSlice"
+import { createPasswordControllerUrl, setTokenFound, verifyPasswordToken, verifyUser } from "../../redux/passwordsSlice"
 import VerifyUserForm from "../Forms/VerifyUserForm"
 import MyNavbar from "../Layout/MyNavbar"
 import ShowPasswords from "./ShowPasswords/ShowPasswords"
@@ -11,7 +11,7 @@ export default function Passwords() {
   const dispatch = useDispatch()
 
   // checking to see if token exists
-  const passwordToken = localStorage.getItem(`passwordToken`)
+  const passwordToken = localStorage.getItem(`verificationToken`)
 
   if (passwordToken != null) {
     dispatch(setTokenFound(true))
@@ -42,7 +42,7 @@ export default function Passwords() {
                   <Spinner animation="border" />
                 </>
               :
-                <VerifyUserForm />
+                <VerifyUserForm onUserVerified={verifyUser}/>
             }
           </>
       }

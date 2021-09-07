@@ -22,10 +22,6 @@ function App() {
         <Profile />
       </Route>
 
-      <Route exact path={`${profilePageUrl}/passwords`}>
-        <Passwords />
-      </Route>
-
       <Route path="/">
         <HomePage />
       </Route>

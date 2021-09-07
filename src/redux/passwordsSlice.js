@@ -21,10 +21,9 @@ const createPasswordControllerUrl = endPoint => state => {
 }
 
 const verifyUser = createAsyncThunk('passwords/verifyUser',
-    ({ url, payload, setState=null, state=null }) => {
+    ({ url, payload }) => {
       try {
         const data = post(url, payload)
-        setState && setState(state)
         return data
       } catch (err) {
         return isRejectedWithValue(err)
@@ -104,7 +103,7 @@ const passwordsSlice = createSlice({
     builder
 
       .addCase(verifyUser.fulfilled, (state, action) =>{
-        localStorage.setItem(`passwordToken`, action.payload)
+        localStorage.setItem(`verificationToken`, action.payload)
         state.userVerified = true
         state.userCredentialsWrong = false
       })
@@ -119,7 +118,7 @@ const passwordsSlice = createSlice({
 
       .addCase(verifyPasswordToken.rejected, (state, action) => {
         state.tokenFound = false
-        localStorage.removeItem("passwordToken")
+        localStorage.removeItem(`verificationToken`)
       })
 
       .addCase(getPasswords.fulfilled, (state, action) => {

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from 'yup';
-import { createPasswordControllerUrl, setPasswordsUserId, verifyUser } from "../../redux/passwordsSlice";
+import { createPasswordControllerUrl, setPasswordsUserId } from "../../redux/passwordsSlice";
 
 
 export default function VerifyUserForm(props) {
@@ -42,7 +42,7 @@ export default function VerifyUserForm(props) {
           payload: credentials
         }
 
-    dispatch(verifyUser(dispatchOptions))
+    dispatch(props.onUserVerified(dispatchOptions))
   }
 
   useEffect(() => {}, [userCredentialsWrong])

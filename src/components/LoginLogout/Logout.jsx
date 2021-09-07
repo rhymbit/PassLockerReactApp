@@ -61,3 +61,9 @@ function useDeletePasswords() {
 
   return onLogout
 }
+
+
+export {
+  useLogout,
+  useDeletePasswords,
+}
