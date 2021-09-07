@@ -29,7 +29,7 @@ export default function UserForm(props) {
 
   return (
     <div>
-      {FormCss()}
+      {formCss()}
 
       <Container>
         <h1>Hello {name}. Just need a few more details from you before setting up your profile.</h1>
@@ -120,10 +120,14 @@ const schema = yup.object().shape({
   gender: yup.string().required(),
 })
 
-function FormCss() {
+function formCss() {
   return (
     <Helmet>
       <link rel="stylesheet" type="text/css" href={`/css/reactform.css`} />
     </Helmet>
   )
+}
+
+export {
+  formCss
 }

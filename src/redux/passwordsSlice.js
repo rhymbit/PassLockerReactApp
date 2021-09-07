@@ -15,9 +15,9 @@ const initialState = {
   noOfPasswordsAllowed: 10,
 }
 
-const createPasswordControllerUrl = endPoint => state => {
+const createPasswordControllerUrl = endpoint => state => {
   const { userId } = state.passwords
-  return `${apiUrl}/${userId}/${endPoint}`
+  return userId ? `${apiUrl}/${userId}/${endpoint}` : `${apiUrl}/${endpoint}`
 }
 
 const verifyUser = createAsyncThunk('passwords/verifyUser',

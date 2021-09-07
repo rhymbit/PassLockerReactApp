@@ -13,9 +13,7 @@ export default function MyFooter() {
   return (
     <Container fluid>
       <Row className="justify-content-center">
-        <Card
-          id="footer"
-        >
+        <Card className="footer-card">
           <Card.Header>Hello👋, I'm Prateek and I created this website. Thanks for visiting.</Card.Header>
 
           <Nav className="justify-content-center" variant="pills">

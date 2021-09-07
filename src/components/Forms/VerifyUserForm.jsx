@@ -1,10 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect } from "react";
-import { Helmet } from 'react-helmet-async';
+import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as yup from 'yup';
-import { createPasswordControllerUrl, setPasswordsUserId } from "../../redux/passwordsSlice";
+import { formCss } from "./UserForm";
 
 
 export default function VerifyUserForm(props) {
@@ -12,15 +11,8 @@ export default function VerifyUserForm(props) {
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: yupResolver(schema)
   })
-  
+
   const dispatch = useDispatch()
-
-  const userId = useSelector(state => state.user.userId)
-  dispatch(setPasswordsUserId(userId))
-
-  const verifyUserUrl = useSelector(createPasswordControllerUrl(`verify-user`))
-
-  const userCredentialsWrong = useSelector(state => state.passwords.userCredentialsWrong)
 
   const onSubmit = (formData) => {
     const credentials = {
@@ -28,39 +20,17 @@ export default function VerifyUserForm(props) {
       secret: formData.secret
     }
 
-    const dispatchOptions = 
-      props.setState ?
-        {
-          url: verifyUserUrl,
-          payload: credentials,
-          setState: props.setState,
-          state: props.state
-        }
-      :
-        {
-          url: verifyUserUrl,
-          payload: credentials
-        }
-
-    dispatch(props.onUserVerified(dispatchOptions))
+    dispatch(props.onUserVerified({
+      url: props.url,
+      payload: credentials,
+    }))
   }
-
-  useEffect(() => {}, [userCredentialsWrong])
 
   return (
     <>
-      <Helmet>
-        <link rel="stylesheet" type="text/css" href={`/css/reactform.css`} />
-      </Helmet>
-
+      {formCss()}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        {
-          userCredentialsWrong ?
-            <h2>Entered Details are incorrect</h2>
-          :
-            <h2>Please First Verify Yourself</h2>
-        }
 
         <div>
           <label>Password</label>
@@ -89,7 +59,6 @@ export default function VerifyUserForm(props) {
     </>
   )
 }
-
 
 const schema = yup.object().shape({
   password: yup.string().required().min(8).max(20).matches(/^[A-Z]+[a-z]+[0-9|@|#|$|&|%]+[a-z|A-Z|0-9|@#$%&]*$/,

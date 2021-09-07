@@ -36,7 +36,7 @@ const createUser = createAsyncThunk('user/createUser',
       return post(url, payload)
   })
 
-const verifyUser = createAsyncThunk('passwords/verifyUser',
+const verifyUser = createAsyncThunk('users/verifyUser',
   ({ url, payload }) => {
     try {
       const data = post(url, payload)
@@ -84,6 +84,10 @@ const userSlice = createSlice({
     setUserProfilePictureUrl(state, action) {
       state.profilePictureUrl = action.payload
     },
+
+    setCanDeleteProfile(state, action) {
+      state.canDeleteProfile = action.payload
+    }
   },
 
   extraReducers: builder => {
@@ -126,6 +130,7 @@ const userSlice = createSlice({
 
       .addCase(verifyUser.fulfilled, (state, action) => {
         state.canDeleteProfile = true
+        state.canEditProfile = true
       })
 
       .addCase(verifyUser.rejected, (state, action) => {
@@ -154,6 +159,7 @@ export const {
   setUserIsLoggedIn,
   setUserIsGoogleLoggedIn,
   setUserProfilePictureUrl,
+  setCanDeleteProfile,
 } = userSlice.actions
 
 export {

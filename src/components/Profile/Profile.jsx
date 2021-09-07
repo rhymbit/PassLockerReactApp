@@ -1,20 +1,27 @@
-import React from "react"
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useRouteMatch } from "react-router"
 import { Route, Switch } from "react-router-dom"
+import { setCanDeleteProfile } from "../../redux/userSlice"
 import Passwords from "../Passwords/Passwords"
 import DeleteProfile from "./DeleteProfile/DeleteProfile"
+import EditProfile from "./EditProfile/EditProfile"
 import ShowProfile from "./ShowProfile/ShowProfile"
 
-function UserProfile() {
+function Profile() {
 
   let match = useRouteMatch()
 
-  const username = useSelector(state => state.user.username)
+  const dispatch = useDispatch()
+  const canDeleteProfile = useSelector(state => state.user.canDeleteProfile) 
+
+  useEffect(() => {    
+    canDeleteProfile ? dispatch(setCanDeleteProfile(false)) : null
+  })
 
   return (
     <Switch>
-      <Route path={`${match.path}/edit-profile`}>Edit Profile</Route>
+      <Route path={`${match.path}/edit-profile`}><EditProfile /></Route>
 
       <Route path={`${match.path}/delete-profile`}><DeleteProfile /></Route>
 
@@ -26,4 +33,4 @@ function UserProfile() {
   )
 }
 
-export default UserProfile
+export default Profile

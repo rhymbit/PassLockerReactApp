@@ -109,8 +109,8 @@ header {
 }
 
 
-#footer {
-  width: 80rem;
+.footer-card {
+  width: 110rem;
   background: var(--gray5);
   color: var(--gray0);
   margin-top: 7rem;
