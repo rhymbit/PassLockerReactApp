@@ -19,7 +19,6 @@ export default function VerifyUserForm(props) {
       password: formData.password,
       secret: formData.secret
     }
-
     dispatch(props.onUserVerified({
       url: props.url,
       payload: credentials,
@@ -59,6 +58,7 @@ export default function VerifyUserForm(props) {
     </>
   )
 }
+
 
 const schema = yup.object().shape({
   password: yup.string().required().min(8).max(20).matches(/^[A-Z]+[a-z]+[0-9|@|#|$|&|%]+[a-z|A-Z|0-9|@#$%&]*$/,

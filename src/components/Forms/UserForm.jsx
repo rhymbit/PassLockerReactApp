@@ -8,23 +8,26 @@ import * as yup from 'yup';
 
 export default function UserForm(props) {
 
+  console.log(props.userData)
+
   const {
+    username,
     name,
     userEmail,
-    username,
     location,
   } = { ...props.userData }
+
+  const { url, onSubmit, setSubmit } = props
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
   const submitForm = useOnSubmit()
-
-  const onSubmit = (formData) => {
-    formData.email = userEmail
-    submitForm(props.url, formData, props.onSubmit)
-    props.setSubmit(true)
+  const onFormSubmit = (formData) => {
+    console.log(formData)
+    submitForm(url, formData, onSubmit)
+    setSubmit(true)
   }
 
   return (
@@ -35,7 +38,7 @@ export default function UserForm(props) {
         <h1>Hello {name}. Just need a few more details from you before setting up your profile.</h1>
       </Container>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onFormSubmit)}>
 
         <div>
           <label>Username</label>
@@ -130,4 +133,4 @@ function formCss() {
 
 export {
   formCss
-}
+};

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit"
 import deleteFunc from "../js/delete"
 import post from "../js/post"
+import update from "../js/update"
 
 const apiUrl = `https://localhost:5001/api/user`
 
@@ -40,6 +41,16 @@ const verifyUser = createAsyncThunk('users/verifyUser',
   ({ url, payload }) => {
     try {
       const data = post(url, payload)
+      return data
+    } catch (err) {
+      return isRejectedWithValue(err)
+    }
+  })
+
+const updateUser = createAsyncThunk('user/updateUser',
+  ({ url, payload }) => {
+    try {   
+      const data = update(url, payload)
       return data
     } catch (err) {
       return isRejectedWithValue(err)
@@ -106,7 +117,7 @@ const userSlice = createSlice({
         // already registered user
         else {
           state.isNewUser = false
-          state.username = action.payload.userName
+          state.username = action.payload.username
           state.gender = action.payload.gender
           state.isLoggedIn = true
           state.isConfirmed = action.payload.isConfirmed
@@ -120,7 +131,7 @@ const userSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.userData = action.payload
         state.userId = action.payload.userId
-        state.username = action.payload.userName
+        state.username = action.payload.username
         state.isConfirmed = action.payload.isConfirmed
         state.gender = action.payload.gender
         state.isNewUser = false
@@ -129,12 +140,18 @@ const userSlice = createSlice({
       })
 
       .addCase(verifyUser.fulfilled, (state, action) => {
+        localStorage.setItem(`verificationToken`, action.payload)
         state.canDeleteProfile = true
         state.canEditProfile = true
       })
 
       .addCase(verifyUser.rejected, (state, action) => {
         console.log("Failed to verify user")
+      })
+
+      .addCase(updateUser.fulfilled, (state,action) => {
+        console.log(action.payload)
+        console.log("User Updated Successfully")
       })
       
       .addCase(deleteProfile.fulfilled, (state, action) => {
@@ -145,8 +162,6 @@ const userSlice = createSlice({
         console.log("Cannot delete user, some shit wrong at backend")
         console.log(action.payload)
       })
-
-      
   }
 })
 
@@ -167,6 +182,7 @@ export {
   googleUserLogin,
   createUser,
   verifyUser,
+  updateUser,
   deleteProfile,
 }
 
