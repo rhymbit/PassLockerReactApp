@@ -51,11 +51,12 @@ export default function PasswordsEditForm(props) {
 
 function useOnSubmit(setEditPasswords) {
   const dispatch = useDispatch()
+  const userId = useSelector(state => state.user.userId)
 
-  let postPasswordsUrlWithoutToken = useSelector(createPasswordControllerUrl(`create-passwords`))
+  let postPasswordsUrlWithoutToken = useSelector(createPasswordControllerUrl(`${userId}/create-passwords`))
 
   const postPasswordsUrlWithToken =
-    `${postPasswordsUrlWithoutToken}?token=${localStorage.getItem('passwordToken')}`
+    `${postPasswordsUrlWithoutToken}?token=${localStorage.getItem('verificationToken')}`
 
   const onSubmit = (e) => {
     e.preventDefault()

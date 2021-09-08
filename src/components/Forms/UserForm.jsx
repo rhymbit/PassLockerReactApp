@@ -35,7 +35,7 @@ export default function UserForm(props) {
       {formCss()}
 
       <Container>
-        <h1>Hello {name}. Just need a few more details from you before setting up your profile.</h1>
+        <h1>Hi {name}👋. Fill out the form details to proceed further.</h1>
       </Container>
 
       <form onSubmit={handleSubmit(onFormSubmit)}>

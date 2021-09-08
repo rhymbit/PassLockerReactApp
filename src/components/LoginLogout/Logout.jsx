@@ -66,4 +66,4 @@ function useDeletePasswords() {
 export {
   useLogout,
   useDeletePasswords,
-}
+};

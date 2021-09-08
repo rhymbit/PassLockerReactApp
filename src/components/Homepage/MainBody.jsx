@@ -1,5 +1,5 @@
-import React from "react"
-import { Card, Col, Container, Row } from "react-bootstrap"
+import React from "react";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
 export default function MainBody() {
 
@@ -62,8 +62,10 @@ export default function MainBody() {
           >
             <Card.Img variant="top" src={imageSrc} />
             <Card.Body className="services-text">
+              <Card.Title className="services-title">
+                {item.title}
+              </Card.Title>
               <Card.Text>
-                <h3>{item.title}</h3>
                 {item.text}
               </Card.Text>
             </Card.Body>

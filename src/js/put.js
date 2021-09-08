@@ -1,4 +1,4 @@
-async function update(url='', payload={}) {
+async function put(url='', payload={}) {
   const options = {
     method: 'PUT',
     headers: {
@@ -14,9 +14,9 @@ async function update(url='', payload={}) {
     return await response.json()
   }
   else {
-    console.log(`Error in 'js/update.js' = ${response.status}`)
+    console.log(`Error in 'js/put.js' = ${response.status}`)
     throw response.status
   }
 }
 
-export default update
+export default put

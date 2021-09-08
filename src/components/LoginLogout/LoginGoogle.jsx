@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Dropdown } from "react-bootstrap"
 import { useGoogleLogin } from "react-google-login"
 import { useDispatch, useSelector } from "react-redux"

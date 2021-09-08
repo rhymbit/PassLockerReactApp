@@ -31,10 +31,10 @@ export default function ShowPasswords() {
 }
 
 function useGetPasswords() {
-
   const dispatch = useDispatch()
+  const userId = useSelector(state => state.user.userId)
 
-  const getPasswordsUrlWithoutToken = useSelector(createPasswordControllerUrl(`get-passwords`))
+  const getPasswordsUrlWithoutToken = useSelector(createPasswordControllerUrl(`${userId}/get-passwords`))
   
   const getPasswordsUrlWithToken = 
     `${getPasswordsUrlWithoutToken}?token=${localStorage.getItem('verificationToken')}`

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit"
 import deleteFunc from "../js/delete"
 import post from "../js/post"
-import update from "../js/update"
+import put from "../js/put"
 
 const apiUrl = `https://localhost:5001/api/user`
 
@@ -50,7 +50,7 @@ const verifyUser = createAsyncThunk('users/verifyUser',
 const updateUser = createAsyncThunk('user/updateUser',
   ({ url, payload }) => {
     try {   
-      const data = update(url, payload)
+      const data = put(url, payload)
       return data
     } catch (err) {
       return isRejectedWithValue(err)
@@ -59,7 +59,7 @@ const updateUser = createAsyncThunk('user/updateUser',
 
 const deleteProfile = createAsyncThunk('user/deleteProfile',
   ({ url }) => {
-     try{ 
+     try{
       const data = deleteFunc(url)
       return data
     } catch (err) {
@@ -141,8 +141,8 @@ const userSlice = createSlice({
 
       .addCase(verifyUser.fulfilled, (state, action) => {
         localStorage.setItem(`verificationToken`, action.payload)
-        state.canDeleteProfile = true
         state.canEditProfile = true
+        state.canDeleteProfile = true
       })
 
       .addCase(verifyUser.rejected, (state, action) => {
@@ -150,8 +150,11 @@ const userSlice = createSlice({
       })
 
       .addCase(updateUser.fulfilled, (state,action) => {
-        console.log(action.payload)
-        console.log("User Updated Successfully")
+        state.userData = action.payload
+        state.userId = action.payload.userId
+        state.username = action.payload.username
+        state.gender = action.payload.gender
+        state.isConfirmed = action.payload.isConfirmed
       })
       
       .addCase(deleteProfile.fulfilled, (state, action) => {

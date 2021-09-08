@@ -1,11 +1,9 @@
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Redirect } from "react-router"
-import { verifyUser, deleteProfile } from "../../../redux/userSlice"
-import { createUserControllerUrl } from "../../../redux/userSlice"
-import VerifyUserForm from "../../Forms/VerifyUserForm"
+import { createUserControllerUrl, deleteProfile, verifyUser } from "../../../redux/userSlice"
 import { useDeletePasswords, useLogout } from "../../LoginLogout/Logout"
+import VerifyUser from "../../VerifyUser/VerifyUser"
 
 export default function DeleteProfile() {
 
@@ -28,7 +26,7 @@ export default function DeleteProfile() {
           <Redirect to='/' />
         </>
       :
-        <VerifyUserForm onUserVerified={verifyUser}/>
+        <VerifyUser onUserVerified={verifyUser} />
       }
     </>
   )
