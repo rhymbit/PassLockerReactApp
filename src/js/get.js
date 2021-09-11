@@ -13,7 +13,6 @@ async function get(url = '') {
     return await response.json()
   }
   else {
-    console.log(`Error in 'server/shared/getData.js' = ${response.status}`)
     throw response.status
   }
 }

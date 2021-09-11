@@ -146,7 +146,7 @@ const userSlice = createSlice({
       })
 
       .addCase(verifyUser.rejected, (state, action) => {
-        console.log("Failed to verify user")
+      
       })
 
       .addCase(updateUser.fulfilled, (state,action) => {
@@ -158,12 +158,10 @@ const userSlice = createSlice({
       })
       
       .addCase(deleteProfile.fulfilled, (state, action) => {
-        console.log("User Deleted Successfully")
         state.canDeleteProfile = true
       })
+
       .addCase(deleteProfile.rejected, (state, action) => {
-        console.log("Cannot delete user, some shit wrong at backend")
-        console.log(action.payload)
       })
   }
 })
