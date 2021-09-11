@@ -13,7 +13,6 @@ async function deleteFunc(url = '') {
     return await response.json()
   }
   else {
-    console.log(`Error in deleteFunc.js' = ${response.status}`)
     throw response.status
   }
 }

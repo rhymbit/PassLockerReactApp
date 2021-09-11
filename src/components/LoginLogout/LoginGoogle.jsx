@@ -56,7 +56,7 @@ function useLogin() {
       dispatch(setUserProfilePictureUrl(profile.getImageUrl()))
     },
 
-    onFailure: () => { console.log("Unable to login google user") }
+    onFailure: () => { alert("Cannot log you in. Some problem at the server.") }
   })
 
   return signIn

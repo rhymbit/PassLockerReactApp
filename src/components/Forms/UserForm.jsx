@@ -8,8 +8,6 @@ import * as yup from 'yup';
 
 export default function UserForm(props) {
 
-  console.log(props.userData)
-
   const {
     username,
     name,
@@ -25,7 +23,6 @@ export default function UserForm(props) {
 
   const submitForm = useOnSubmit()
   const onFormSubmit = (formData) => {
-    console.log(formData)
     submitForm(url, formData, onSubmit)
     setSubmit(true)
   }
@@ -50,6 +47,12 @@ export default function UserForm(props) {
           <label>Password</label>
           <input type="password" {...register("password")} />
           {errors.password && <p>{errors.password.message}</p>}
+        </div>
+
+        <div>
+          <label>Confirm Password</label>
+          <input type="password" {...register("confirmPassword")} />
+          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
         </div>
 
         <div>
@@ -86,7 +89,7 @@ export default function UserForm(props) {
           <input {...register("name")} defaultValue={name} />
         </div>
         <div>
-          <label>Your Email</label>
+          <label>Your Email (you cannot modify this)</label>
           <input {...register("email")} defaultValue={userEmail} readOnly />
         </div>
 
@@ -118,6 +121,7 @@ const schema = yup.object().shape({
       `Must start with a capital letter followed by small letter. 
      Must contain at least one digit or special character chosen from '@#$%&'. 
      Min Length 8, Max length 20.`),
+     confirmPassword: yup.string().oneOf([yup.ref('password'), null], `Passwords must match`),
   secret: yup.string().required(),
   location: yup.string().required().max(10),
   gender: yup.string().required(),

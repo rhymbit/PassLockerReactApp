@@ -36,6 +36,12 @@ export default function VerifyUserForm(props) {
           <input type="password" {...register("password")} />
           {errors.password && <p>{errors.password.message}</p>}
         </div>
+
+        <div>
+          <label>Confirm Password</label>
+          <input type="password" {...register("confirmPassword")} />
+          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+        </div>
         
         <div>
           <label>Secret Question</label>
@@ -65,5 +71,6 @@ const schema = yup.object().shape({
         `Must start with a capital letter followed by small letter. 
           Must contain at least one digit or special character chosen from '@#$%&'. 
           Min Length 8, Max length 20.`),
-   secret: yup.string().required(),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], `Passwords must match`),
+  secret: yup.string().required(),
 })

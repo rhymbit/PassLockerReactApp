@@ -14,7 +14,6 @@ async function put(url='', payload={}) {
     return await response.json()
   }
   else {
-    console.log(`Error in 'js/put.js' = ${response.status}`)
     throw response.status
   }
 }

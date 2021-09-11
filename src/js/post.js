@@ -14,7 +14,6 @@ async function post(url = '', payload = {}) {
     return await response.json()
   }
   else {
-    console.log(`Error in 'server/shared/postData.js' = ${response.status}`)
     throw response.status
   }
 }
